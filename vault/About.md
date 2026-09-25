@@ -1,4 +1,4 @@
-I’m a physics student and hobbyist mathematician in the more abstract side of things. Within mathematics, my main areas of interest include differential geometry and linear algebra, with category theory taking up more of my focus recently.
+I’m a physics student and hobbyist mathematician interested in the more abstract side of things. Within mathematics, my main areas of interest include differential geometry and linear algebra, with category theory taking up more of my focus recently.
 
 I originally became interested in physics at nine, when a NOVA documentary on black holes led to me reading every book I could find on them in my public library. Once I reached university, concern about my mathematical preparation pushed me to build a stronger foundation for my courses; over time, that practical motivation developed into an appreciation of math for math's sake. While I still consider myself a physicist in temperament, it has shifted from my main priority to an area in which I can apply any fun math I learn.
 
