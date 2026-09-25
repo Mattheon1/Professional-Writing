@@ -1,0 +1,22 @@
+{
+  "name": "matthew-burger-notes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test scripts/publishing.test.mjs",
+    "preview": "node scripts/preview.mjs",
+    "package": "python3 scripts/package.py"
+  },
+  "dependencies": {
+    "katex": "0.16.22",
+    "markdown-it": "14.1.0",
+    "markdown-it-footnote": "^4.0.0",
+    "yaml": "^2.8.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

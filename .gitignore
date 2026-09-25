@@ -1,0 +1,12 @@
+node_modules/
+dist/
+exports/
+.openai/
+.sites-runtime/
+.env
+.env.*
+vault/.obsidian/*
+!vault/.obsidian/app.json
+!vault/.obsidian/templates.json
+vault/.trash/
+.DS_Store
