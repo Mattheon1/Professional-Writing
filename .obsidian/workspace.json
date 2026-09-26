@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "vault/Projects.md",
+                "file": "vault/About.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Projects"
+              "title": "About"
             }
           }
         ]
@@ -191,11 +191,11 @@
   },
   "active": "7256cd1490b71bf2",
   "lastOpenFiles": [
+    "vault/Start Here.md",
+    "vault/Projects.md",
     "vault/Home.md",
     "vault/CV.md",
     "vault/Writing/A Fine Case for Affine Space.md",
-    "vault/Start Here.md",
-    "vault/Projects.md",
     "scripts/fonts/LICENSE.txt",
     "scripts/fonts/DejaVuSans.ttf",
     "scripts/fonts/DejaVuSans-Bold.ttf",
