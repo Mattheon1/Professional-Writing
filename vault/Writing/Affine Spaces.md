@@ -1,10 +1,10 @@
 ---
 publish: true
-title: "Affine Spaces"
-slug: "affine-spaces"
-subject: "Affine geometry"
-status: "Earlier draft"
-description: "Translations, subtraction, and the vector-space structure obtained by choosing an origin."
+title: Affine Spaces
+slug: affine-spaces
+subject: Affine geometry
+status: First Draft
+description: Translations, subtraction, and the vector-space structure obtained by choosing an origin.
 order: 40
 ---
 
