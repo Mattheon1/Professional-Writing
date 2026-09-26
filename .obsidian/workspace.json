@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "vault/About.md",
+                "file": "vault/CV.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "About"
+              "title": "CV"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "vault/About.md",
+                "file": "vault/Writing/A Fine Case for Affine Space.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "vault/About.md",
+                "file": "vault/Writing/A Fine Case for Affine Space.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "vault/About.md",
+                "file": "vault/Writing/A Fine Case for Affine Space.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -191,11 +191,20 @@
   },
   "active": "7256cd1490b71bf2",
   "lastOpenFiles": [
+    "vault/Writing/A Fine Case for Affine Space.md",
+    "vault/Start Here.md",
+    "vault/Projects.md",
+    "vault/CV.md",
+    "scripts/fonts/LICENSE.txt",
+    "scripts/fonts/DejaVuSans.ttf",
+    "scripts/fonts/DejaVuSans-Bold.ttf",
+    "scripts/fonts",
+    "PORTFOLIO-UPDATE.md",
+    "scripts/cv-pdf.mjs",
+    "vault/About.md",
     "vault/_Templates/New note.md",
     "vault/Attachments/Screenshot from 2025-08-25 02-43-58.png",
-    "vault/About.md",
     "README.md",
-    "vault/Start Here.md",
     "vault/Home.md"
   ]
 }

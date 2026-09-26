@@ -41,3 +41,26 @@ test('Obsidian editing, publication selection, links, and removal work together'
   assert.notEqual(build().status,0);assert.equal(fs.readFileSync(path.join(output,'index.html'),'utf8'),previous);
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 });
+
+test('portfolio pages, Markdown links, and CV PDF follow edits at a project base path',()=>{
+ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'portfolio-'));
+ try{
+  const vault=path.join(temp,'vault'),output=path.join(temp,'site');fs.mkdirSync(vault);
+  fs.writeFileSync(path.join(vault,'Home.md'),'---\nname: Portfolio Author\n---\n[[CV]] and [Projects](Projects.md).');
+  fs.writeFileSync(path.join(vault,'About.md'),'Original about.');
+  fs.writeFileSync(path.join(vault,'CV.md'),'## Education\nPhysics 2026');
+  fs.writeFileSync(path.join(vault,'Projects.md'),'## Raytracing\n[[CV#Education]]');
+  const env={...process.env,CONTENT_DIR:vault,OUTPUT_DIR:output,BASE_PATH:'/Professional-Writing'};
+  const build=()=>spawnSync(process.execPath,['build.mjs'],{env,encoding:'utf8'});
+  let r=build();assert.equal(r.status,0,r.stdout+r.stderr);
+  const pdf=path.join(output,'Matthew-Burger-CV.pdf'),previous=fs.readFileSync(pdf);
+  assert.equal(previous.subarray(0,5).toString(),'%PDF-');
+  assert.match(fs.readFileSync(path.join(output,'cv/index.html'),'utf8'),/Physics 2026/);
+  assert.match(fs.readFileSync(path.join(output,'index.html'),'utf8'),/href="\/Professional-Writing\/projects\/"/);
+  const check=spawnSync(process.execPath,['scripts/check.mjs'],{env,encoding:'utf8'});assert.equal(check.status,0,check.stdout+check.stderr);
+  fs.writeFileSync(path.join(vault,'CV.md'),'## Education\nUpdated qualification');
+  r=build();assert.equal(r.status,0,r.stderr);
+  assert.match(fs.readFileSync(path.join(output,'cv/index.html'),'utf8'),/Updated qualification/);
+  assert.notDeepEqual(fs.readFileSync(pdf),previous);
+ }finally{fs.rmSync(temp,{recursive:true,force:true});}
+});

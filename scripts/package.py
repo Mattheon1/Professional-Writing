@@ -12,7 +12,7 @@ for directory in ('scripts', '.github/workflows', 'vault'):
         relative = file.relative_to(root).as_posix()
         if '/.obsidian/' in relative and relative not in ('vault/.obsidian/app.json','vault/.obsidian/templates.json'):
             continue
-        if file.suffix.lower() in ('.md','.png','.jpg','.jpeg','.gif','.svg','.webp','.avif','.pdf','.mjs','.py','.yml','.json'):
+        if file.suffix.lower() in ('.md','.png','.jpg','.jpeg','.gif','.svg','.webp','.avif','.pdf','.mjs','.py','.yml','.json','.ttf','.txt'):
             files.append(file)
 export_ignore = '''node_modules/
 dist/

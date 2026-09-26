@@ -4,6 +4,7 @@ import MarkdownIt from 'markdown-it';
 import footnote from 'markdown-it-footnote';
 import katex from 'katex';
 import YAML from 'yaml';
+import {cvPdf} from './scripts/cv-pdf.mjs';
 
 const vault = path.resolve(process.env.CONTENT_DIR || 'vault');
 const output = path.resolve(process.env.OUTPUT_DIR || 'dist');
@@ -31,6 +32,7 @@ function readNote(file) {
 }
 const home=readNote(path.join(vault,'Home.md'));
 const about=readNote(path.join(vault,'About.md'));
+const portfolioPages=['Projects','CV'].filter(name=>fs.existsSync(path.join(vault,name+'.md'))).map(name=>({name,file:path.join(vault,name+'.md'),route:'/'+name.toLowerCase()+'/',...readNote(path.join(vault,name+'.md'))}));
 const config={name:home.data.name||'Matthew Burger',role:home.data.role||'Physics student & recreational mathematician',title:home.data.title||'Mathematical writing',description:home.data.description||''};
 const notes=walk(path.join(vault,'Writing')).filter(f=>f.endsWith('.md')).map(file=>{
  const {data,body}=readNote(file);if(data.publish!==true)return null;
@@ -93,7 +95,7 @@ md.renderer.rules.wikilink=(tokens,i,options,env)=>{
   reports.missingImages.add(target);return `<span class="omitted-figure" title="${esc(target)}">${/\.md$/.test(target)||!path.extname(target)?'Embedded note':'Diagram'} not included in this copy.</span>`;
  }
  const [name,heading]=target.split('#');let href;
- if(name==='About')href=url('/#about');else if(name==='Home')href=url('/');else{const found=findNote(name,env.file);if(found)href=noteUrl(found)+(heading?'#'+slugify(heading):'');}
+ if(portfolioPages.some(p=>p.name===name))href=url(portfolioPages.find(p=>p.name===name).route)+(heading?'#'+slugify(heading):'');else if(name==='About')href=url('/#about');else if(name==='Home')href=url('/');else{const found=findNote(name,env.file);if(found)href=noteUrl(found)+(heading?'#'+slugify(heading):'');}
  if(href)return `<a href="${esc(href)}">${esc(alias||target)}</a>`;
  const asset=assetFile(target,env.file);if(asset)return `<a href="${esc(assetUrl(asset))}">${esc(alias||target)}</a>`;
  reports.missingNotes.add(target);return `<span class="unavailable-note" title="This linked note is not included in this collection.">${esc(alias||target)}</span>`;
@@ -119,6 +121,7 @@ function fixLinks(tokens,file){
     if(/\.md$/i.test(name)){
      let found=findNote(name,file);
      if(found)t.attrSet('href',noteUrl(found)+(anchor?'#'+slugify(decodeURIComponent(anchor)):''));
+     else if(portfolioPages.some(p=>p.file===path.resolve(path.dirname(file),decodeURIComponent(name))||p.name+'.md'===name))t.attrSet('href',url(portfolioPages.find(p=>p.file===path.resolve(path.dirname(file),decodeURIComponent(name))||p.name+'.md'===name).route)+(anchor?'#'+slugify(decodeURIComponent(anchor)):''));
      else if(/(?:^|\/)About\.md$/i.test(name))t.attrSet('href',url('/#about'));
      else if(/(?:^|\/)Home\.md$/i.test(name))t.attrSet('href',url('/'));
      else {missing=true;reports.missingNotes.add(name);}
@@ -153,7 +156,7 @@ function render(source,file,{headings:trueHeadings=true}={}){
 const stateToken=md.parse('x',{})[0].constructor;
 const favicon='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#173c68"/><text x="24" y="33" font-family="Georgia,serif" font-size="31" fill="white" text-anchor="middle">M</text></svg>');
 function page({title,description,body}){return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} — ${esc(config.name)}</title><meta name="description" content="${esc(description)}"><meta name="color-scheme" content="light"><link rel="icon" href="${favicon}"><link rel="stylesheet" href="${url('/style.css')}"><link rel="stylesheet" href="${url('/assets/katex/katex.min.css')}"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="${url('/')}">${esc(config.name)}</a><nav aria-label="Main navigation"><a href="${url('/#writing')}">Writing</a><a href="${url('/#about')}">About</a></nav></header>${body}<footer class="site-footer"><span>${esc(config.name)}</span><span>Mathematical writing</span></footer></body></html>`;}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} — ${esc(config.name)}</title><meta name="description" content="${esc(description)}"><meta name="color-scheme" content="light"><link rel="icon" href="${favicon}"><link rel="stylesheet" href="${url('/style.css')}"><link rel="stylesheet" href="${url('/assets/katex/katex.min.css')}"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="${url('/')}">${esc(config.name)}</a><nav aria-label="Main navigation"><a href="${url('/#writing')}">Writing</a><a href="${url('/#about')}">About</a>${portfolioPages.map(p=>`<a href="${url(p.route)}">${esc(p.name)}</a>`).join('')}</nav></header>${body}<footer class="site-footer"><span>${esc(config.name)}</span><span>Writing &amp; professional portfolio</span></footer></body></html>`;}
 const groups=[];for(const n of notes){let g=groups.find(g=>g.title===n.subject);if(!g){g={title:n.subject,notes:[]};groups.push(g);}g.notes.push(n);}
 const rows=groups.map(g=>{
  const subtitle=g.notes.every(n=>n.status.startsWith('Earlier'))?'Earlier writing':g.notes.every(n=>n.status==='Working note')?'Working notes':'';
@@ -167,12 +170,21 @@ for(const n of notes){
  const body=`<main id="main" class="reading"><div class="article-top"><a class="back-link" href="${url('/#writing')}">← All writing</a><div class="article-meta"><span>${esc(n.subject)}</span><span>${esc(n.status)}</span></div><h1>${esc(n.title)}</h1>${n.description?`<p class="article-summary">${esc(n.description)}</p>`:''}</div><div class="reading-grid"><article class="prose">${rendered.html}${related.length?`<div class="related"><p>Also in ${esc(n.subject.toLowerCase())}</p>${related.map(r=>`<a href="${noteUrl(r)}">${esc(r.title)} <span aria-hidden="true">→</span></a>`).join('')}</div>`:''}</article>${toc}</div></main>`;
  pages.set('writing/'+n.slug+'/index.html',page({title:n.title,description:n.description,body}));
 }
+for(const p of portfolioPages){
+ const rendered=render(p.body,p.file);
+ const toc=`<aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol>${rendered.headings.filter(h=>h.depth===0).map(h=>`<li><a href="#${h.id}">${esc(h.title)}</a></li>`).join('')}</ol></nav></aside>`;
+ const download=p.name==='CV'?`<p class="download"><a href="${url('/Matthew-Burger-CV.pdf')}" download>Download CV (PDF)</a></p>`:'';
+ pages.set(p.route.slice(1)+'index.html',page({title:p.data.title||p.name,description:p.data.description||'',body:`<main id="main" class="reading portfolio-page"><div class="article-top"><a class="back-link" href="${url('/')}">← Home</a><p class="eyebrow portfolio-eyebrow">${esc(config.name)}</p><h1>${esc(p.data.title||p.name)}</h1><p class="article-summary">${esc(p.data.description||'')}</p>${download}</div><div class="reading-grid"><article class="prose">${rendered.html}</article>${toc}</div></main>`}));
+}
+const cv=portfolioPages.find(p=>p.name==='CV');
+const cvBuffer=cv?await cvPdf(cv.body,config.name):null;
 pages.set('404.html',page({title:'Page not found',description:'This page could not be found.',body:`<main id="main" class="home"><h1>Page not found</h1><p>This page isn’t part of the collection.</p><p><a href="${url('/')}">Return to the writing</a></p></main>`}));
 console.log(JSON.stringify({...reports,published:notes.map(n=>relative(n.file)),missingNotes:[...reports.missingNotes],missingImages:[...reports.missingImages]},null,2));
 if(reports.mathErrors.length)throw Error('Math rendering failed. Fix the reported equations before publishing; the previous build has been preserved.');
 // Regenerate the output completely so renamed or unpublished notes cannot linger.
 if(output===path.parse(output).root||output===process.cwd()||output===vault||vault.startsWith(output+path.sep))throw Error('Unsafe output directory.');
 fs.rmSync(output,{recursive:true,force:true});fs.mkdirSync(output,{recursive:true});
+if(cvBuffer)fs.writeFileSync(path.join(output,'Matthew-Burger-CV.pdf'),cvBuffer);
 for(const [file,html]of pages){const target=path.join(output,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,html);}
 for(const file of usedAssets){const target=path.join(output,'assets',relative(file));fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(file,target);}
 fs.mkdirSync(path.join(output,'assets/katex'),{recursive:true});
