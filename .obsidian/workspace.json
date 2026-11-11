@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "vault/Writing/A Fine Case for Affine Space.md",
+                "file": "vault/Writing/Affine coordinates and convexity/Affine Combinations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "A Fine Case for Affine Space"
+              "title": "Affine Combinations"
             }
           }
         ]
@@ -191,13 +191,23 @@
   },
   "active": "7256cd1490b71bf2",
   "lastOpenFiles": [
-    "vault/Writing/Affine Spaces.md",
     "vault/Writing/A Fine Case for Affine Space.md",
-    "vault/Projects.md",
+    "vault/Writing/Affine coordinates and convexity/Topology on Affine Spaces.md",
+    "vault/Writing/Affine coordinates and convexity/Convex Combinations.md",
+    "vault/Writing/Affine coordinates and convexity/Affine and Barycentric Coordinates.md",
+    "vault/Writing/Affine coordinates and convexity/Affine Independence.md",
+    "vault/Writing/Affine coordinates and convexity/Affine Hull.md",
+    "vault/Writing/Affine coordinates and convexity/Affine Combinations.md",
+    "vault/Writing/Affine coordinates and convexity/Affine Basis.md",
+    "vault/Writing/Affine coordinates and convexity",
+    "vault/Attachments/Screenshot from 2025-08-25 02-43-58.png",
     "vault/Home.md",
     "vault/About.md",
     "vault/Start Here.md",
+    "vault/Projects.md",
     "vault/CV.md",
+    "vault/Writing/Affine Spaces.md",
+    "Exalidraw",
     "scripts/fonts/LICENSE.txt",
     "scripts/fonts/DejaVuSans.ttf",
     "scripts/fonts/DejaVuSans-Bold.ttf",
@@ -205,7 +215,6 @@
     "PORTFOLIO-UPDATE.md",
     "scripts/cv-pdf.mjs",
     "vault/_Templates/New note.md",
-    "vault/Attachments/Screenshot from 2025-08-25 02-43-58.png",
     "README.md"
   ]
 }

@@ -10,14 +10,6 @@ Developed a geodesic raytracer to visualize gravitational lensing around a Schwa
 
 I completed the mathematical formulation, implementation, visualization, and presentation independently. The presentation also discussed possible future work using a Hamiltonian formulation and symplectic integration.
 
-## Categorical constructions of topological quantum field theories
-
-**Early-stage work**
-
-I’m contributing to a paper examining how the assumptions placed on categories affect the topological quantum field theories we can construct from them. Fusion categories with suitable additional structure provide a starting point, with examples including the Turaev–Viro construction from spherical fusion categories. The questions I hope to address are what remains possible when some of those assumptions are relaxed, and whether the resulting theories can be classified in terms of the categorical structures used to construct them.
-
-My contribution is primarily on the category theory side, with physical interpretations a direction for further work.
-
 ## Wetland biodiversity and water-quality assessment
 
 **November 2020–May 2021**
