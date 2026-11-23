@@ -79,18 +79,22 @@ md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].
 md.inline.ruler.before('link','wikilink',(state,silent)=>{
  const start=state.pos,embedded=state.src.startsWith('![[',start);if(!embedded&&!state.src.startsWith('[[',start))return false;
  const end=state.src.indexOf(']]',start+(embedded?3:2));if(end===-1)return false;
- const [target,alias]=state.src.slice(start+(embedded?3:2),end).split('|');
- if(!silent){const t=state.push('wikilink','',0);t.meta={embedded,target,alias};}
+ const [target,...imageOptions]=state.src.slice(start+(embedded?3:2),end).split('|'),alias=imageOptions[0];
+ if(!silent){const t=state.push('wikilink','',0);t.meta={embedded,target,alias,imageOptions};}
  state.pos=end+2;return true;
 });
 md.renderer.rules.wikilink=(tokens,i,options,env)=>{
- const {embedded,target,alias}=tokens[i].meta;
+ const {embedded,target,alias,imageOptions=[]}=tokens[i].meta;
  if(embedded){const asset=assetFile(target,env.file);
   if(asset){if(/\.pdf$/i.test(asset))return `<a href="${esc(assetUrl(asset))}">${esc(alias||path.basename(asset))} (PDF)</a>`;
-   const size=/^\d+(x\d+)?$/.test(alias||'')?Number(alias.split('x')[0]):null;
-   const label=size?path.basename(target,path.extname(target)):(alias||path.basename(target,path.extname(target)));
+   // Obsidian image options: `|300` (width), `|center` (layout keyword), and any other text as alt text.
+   const sizeOption=imageOptions.find(o=>/^\d+(x\d+)?$/.test(o.trim()));
+   const size=sizeOption?Number(sizeOption.trim().split('x')[0]):null;
+   const centered=imageOptions.some(o=>o.trim().toLowerCase()==='center');
+   const altOption=imageOptions.find(o=>o!==sizeOption&&o.trim()&&o.trim().toLowerCase()!=='center');
+   const label=altOption||path.basename(target,path.extname(target));
    const alt=target==='Screenshot from 2025-08-25 02-43-58.png'?'Illustration pairing Euclid, Galileo, and Einstein with geometric ideas.':label;
-   return `<img class="note-image" src="${esc(assetUrl(asset))}" alt="${esc(alt)}" ${size?`style="max-width:${Math.min(size,4096)}px"`:''} loading="lazy">`;
+   return `<img class="note-image${centered?' centered':''}" src="${esc(assetUrl(asset))}" alt="${esc(alt)}" ${size?`style="max-width:${Math.min(size,4096)}px"`:''} loading="lazy">`;
   }
   reports.missingImages.add(target);return `<span class="omitted-figure" title="${esc(target)}">${/\.md$/.test(target)||!path.extname(target)?'Embedded note':'Diagram'} not included in this copy.</span>`;
  }
@@ -139,13 +143,22 @@ function render(source,file,{headings:trueHeadings=true}={}){
   const t=tokens[i];
   if(t.type==='heading_open'){
    const inline=tokens[i+1],baseId=slugify(inline.content)||'section',count=seen.get(baseId)||0;seen.set(baseId,count+1);const id=baseId+(count?'-'+count:'');
-   t.attrSet('id',id);const level=Number(t.tag.slice(1));t.tag='h'+Math.min(6,2+level-baseline);headings.push({title:inline.content.replace(/[*_]/g,''),id,depth:level-baseline});
+   t.attrSet('id',id);const level=Number(t.tag.slice(1));t.tag='h'+Math.min(6,2+level-baseline);headings.push({title:inline.content.replace(/[*_]/g,''),html:inline.content.split(/(\$[^$]+\$)/).map((part,k)=>k%2?renderMath(part.slice(1,-1),false,file):esc(part.replace(/[*_]/g,''))).join(''),id,depth:level-baseline});
   }else if(t.type==='heading_close')t.tag='h'+Math.min(6,2+Number(t.tag.slice(1))-baseline);
   if(t.type==='blockquote_open'){
    const inline=tokens[i+2],first=inline?.children?.[0];
    if(first?.type==='text'){
-    const callout=first.content.match(/^\[!([a-zA-Z-]+)\][+-]?(?:[ \t]+([^\n]*))?(?:\n|$)/);
-    if(callout){t.attrSet('class','callout');first.content=first.content.slice(callout[0].length);const label=new stateToken('html_inline','',0);label.content='<strong class="callout-title">'+esc(callout[2]||callout[1][0].toUpperCase()+callout[1].slice(1))+'</strong>';inline.children.unshift(label);}
+    const callout=first.content.match(/^\[!([a-zA-Z-]+)\]([+-])?(?:[ \t]+([^\n]*))?(?:\n|$)/);
+    if(callout){
+     t.attrSet('class','callout');first.content=first.content.slice(callout[0].length);
+     const title=esc(callout[3]||callout[1][0].toUpperCase()+callout[1].slice(1));
+     if(callout[2]){
+      // Foldable callouts (`[!hint]-` collapsed, `[!hint]+` expanded) become <details>, as in Obsidian.
+      t.tag='details';if(callout[2]==='+')t.attrSet('open','');
+      for(let j=i+1;j<tokens.length;j++)if(tokens[j].type==='blockquote_close'&&tokens[j].level===t.level){tokens[j].tag='details';break;}
+      const summary=new stateToken('html_block','',0);summary.content='<summary class="callout-title">'+title+'</summary>\n';tokens.splice(i+1,0,summary);
+     }else{const label=new stateToken('html_inline','',0);label.content='<strong class="callout-title">'+title+'</strong>';inline.children.unshift(label);}
+    }
    }
   }
  }
@@ -166,13 +179,13 @@ const pages=new Map();
 pages.set('index.html',page({title:config.title,description:config.description,body:`<main id="main" class="home"><section class="introduction"><p class="eyebrow">${esc(config.role)}</p><h1>${esc(config.title)}</h1><div class="lede">${render(home.body,path.join(vault,'Home.md')).html}</div></section><section id="writing" aria-labelledby="writing-heading"><div class="section-title"><h2 id="writing-heading">The collection</h2><span>${notes.length} ${notes.length===1?'piece':'pieces'}</span></div>${rows||'<p>No writing has been published yet.</p>'}</section><section class="about" id="about"><h2>About</h2><div>${render(about.body,path.join(vault,'About.md')).html}</div></section></main>`}));
 for(const n of notes){
  const rendered=render(n.body,n.file),related=notes.filter(r=>r.subject===n.subject&&r.slug!==n.slug);
- const toc=rendered.headings.length?`<aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol>${rendered.headings.map(h=>`<li class="${h.depth?'subheading':''}"><a href="#${h.id}">${esc(h.title)}</a></li>`).join('')}</ol></nav></aside>`:'';
+ const toc=rendered.headings.length?`<aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol>${rendered.headings.map(h=>`<li class="${h.depth?'subheading':''}"><a href="#${h.id}">${h.html}</a></li>`).join('')}</ol></nav></aside>`:'';
  const body=`<main id="main" class="reading"><div class="article-top"><a class="back-link" href="${url('/#writing')}">← All writing</a><div class="article-meta"><span>${esc(n.subject)}</span><span>${esc(n.status)}</span></div><h1>${esc(n.title)}</h1>${n.description?`<p class="article-summary">${esc(n.description)}</p>`:''}</div><div class="reading-grid"><article class="prose">${rendered.html}${related.length?`<div class="related"><p>Also in ${esc(n.subject.toLowerCase())}</p>${related.map(r=>`<a href="${noteUrl(r)}">${esc(r.title)} <span aria-hidden="true">→</span></a>`).join('')}</div>`:''}</article>${toc}</div></main>`;
  pages.set('writing/'+n.slug+'/index.html',page({title:n.title,description:n.description,body}));
 }
 for(const p of portfolioPages){
  const rendered=render(p.body,p.file);
- const toc=`<aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol>${rendered.headings.filter(h=>h.depth===0).map(h=>`<li><a href="#${h.id}">${esc(h.title)}</a></li>`).join('')}</ol></nav></aside>`;
+ const toc=`<aside class="toc"><nav aria-label="On this page"><p>On this page</p><ol>${rendered.headings.filter(h=>h.depth===0).map(h=>`<li><a href="#${h.id}">${h.html}</a></li>`).join('')}</ol></nav></aside>`;
  const download=p.name==='CV'?`<p class="download"><a href="${url('/Matthew-Burger-CV.pdf')}" download>Download CV (PDF)</a></p>`:'';
  pages.set(p.route.slice(1)+'index.html',page({title:p.data.title||p.name,description:p.data.description||'',body:`<main id="main" class="reading portfolio-page"><div class="article-top"><a class="back-link" href="${url('/')}">← Home</a><p class="eyebrow portfolio-eyebrow">${esc(config.name)}</p><h1>${esc(p.data.title||p.name)}</h1><p class="article-summary">${esc(p.data.description||'')}</p>${download}</div><div class="reading-grid"><article class="prose">${rendered.html}</article>${toc}</div></main>`}));
 }

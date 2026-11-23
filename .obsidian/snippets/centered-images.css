@@ -1,0 +1,3 @@
+/* Centers embeds written as ![[file.svg|center|300]], matching the website. */
+.image-embed[alt*="center"] { display: block; text-align: center; }
+img[alt*="center"] { display: block; margin-inline: auto; }

@@ -8,98 +8,746 @@ description: Translations, subtraction, and the vector-space structure obtained 
 order: 40
 ---
 
-Notation: $\forall$: for all, $\in$: within/element of, $\exists$: exists, $\exists!$: there exists a unique element,
-$\implies$: implies
+## Author's Note:
 
-##### "Origins" of geometry
-Euclid, Galileo, and Einstein all agreed on one very important property of space: there is no preferred point which could be called an origin from which all points in space are linked. This is reflected not only in the importance of congruence rather than equality in Euclidean geometry, but also in the language of our physical theories.
+_Some rudimentary knowledge of abstract and linear algebra will be necessary to fully understand this article. Where possible, I have tried to explain what certain terms mean, but as this series culminates in topics from projective geometry, differential geometry, and algebraic topology, I have included content which may be beyond some people's level. If you find yourself in that group, try to follow along as much as you can, and focus on what makes sense to you. The difficulty will be largely consistent within each subsection, and anything beyond a first course in linear algebra will be marked with a $\star$. The notation and conventions used throughout the series are collected in [[Notation]]._
 
-Take for instance two coordinate systems on $\mathbb{R}^n$ $(x,y,z)$  and  $(x'_{t},y'_{t},z'_{t})$ connected by a parameterized coordinate transformation $\phi_{t}(x,y,z)=(x'_{t},y'_{t},z'_{t})$$=(x-v_{x}t,y-v_{y}t,z-v_{z}t)$ (here $\forall i\in \{ x,y,z \}$ $v_{i}$ is just some real number).
+---
+## The External Displacement Model of an Affine Space
 
-Given the differential equations $F=m \ddot{\vec{x}}$ (ignoring boundary conditions for a moment), we can see that any solution $\vec{x}:\mathbb{R}\to \mathbb{R}^3$ defines another solution $\vec{x}'=\phi_{t}(\vec{x}):\mathbb{R}\to \mathbb{R}^3$ for any $t\in \mathbb{R}$
+In its simplest form, an affine space $\mathcal{A}:=(A,\vec{A},+)$ consists of a nonempty set of points $A$, an $\mathbb{F}$-vector space $\vec{A}$ called its _model space_ (or space of displacements),[^1] and a free and transitive action of the additive group $(\vec{A},+)$ on $A$ given by
+$$
+\begin{aligned}
++:A\times\vec{A}&\to A; \\
+(p,v)&\mapsto p+v.
+\end{aligned}
+$$
 
-If we interpret the differential equation as being the equation of motion for a particle experiencing some force $F$, then the coordinate transformation $\phi_{t}$ represents the transformation from the first frame at time $t$ into the frame of an observer moving at a constant velocity $\vec{v}$ at time $t$. 
+Informally, the vectors of $\vec{A}$ act by moving the points of $A$: displacing a point by $u+v$ is the same as displacing it first by $u$ and then by $v$, and any point may be carried to any other by exactly one displacement. Explicitly, being a free and transitive group action means in particular that for arbitrary points $p,q\in A$ and vectors $u,v\in\vec{A}$,
 
-If the first solution is a path given in the $(x,y,z)$ coordinates, then the second solution is the same path given in the $(x'_{t},y'_{t},z'_{t})$ coordinates. If $\vec{x}$ satisfies boundary conditions $\dot{\vec{x}}(0)=\dot{\vec{x}}_{0}$ and $\vec{x}(0)=\vec{x}_{0}$, then 
+$$ p+(u+v)=(p+u)+v,\qquad \exists!w\in\vec{A}:p+w=q. $$
 
-
-
-
-Affine spaces are exactly that framework. An affine space is a tuple $\mathcal{A}=(A,\vec{A},+,-)$ (often $+$ and $-$ are omitted as they are defined explicitly in terms of $\vec{A}$) where $A$ is a set of elements called "points", $\vec{A}$ is an associated vector space sometimes called the free vector space over $A$, and $+$ and $-$ are binary operations that will be defined below. 
-
-The set $A$ is often identified with the affine space itself as long as the vector space $\vec{A}$ is known and can be thought of as a set of abstract points with no inherent structure separate from its association with $\vec{A}$.
-
-##### Addition
-The map $+:A\times\vec{A}\to A$ is a free, transitive (right) group action by the additive group $(\vec{A},+)$ on the set $A$ (what this means will be explained) which represents translation in the affine space. If you don't know what a group action is, this just means that addition is defined between vectors and points in a way that respects how addition is defined between vectors.
-
-![[Drawing 2025-05-12 03.31.54.excalidraw.svg]]
-
-For the group action to be free, the only element $v\in\vec{A}$ satisfying that $\forall x\in A\,\,x+v=x$ is the identity ${0}$, and for the action to be transitive, the group action must have only one orbit $x+\vec{A}$(in simpler terms, $\forall x,y\in A\ \,\exists v\in \vec{A}$ satisfying $x+v=y$, and this $v$ must be unique as the fact $+$ is free requires that $x+v=x+w\implies x+(v-w)=x+0=x\implies v-w=0\implies v=w$). 
-
-
-#####  Subtraction
-The uniqueness condition here is what we use to define the second operation  $-:A\times A\to \vec{A};(y,x)\mapsto y-x$ where $y-x$ is the unique vector satisfying $x+v=y$. This operation allows one to identify pairs of points with vectors in the associated vector space. 
-
-An interesting (and useful) fact about the subtraction operation is that it is notationally compatible with the group addition: The vector from two points $(x,z)$ is $z-x$, and the vector from two points $(z,y)$ is $y-z$, and the composition $(z-x)+(y-z)$ is the vector from $x$ to $y$ or $y-x$. 
-
-The power of the subtraction operation becomes immediately obvious when you recast the addition operation in terms of it:  $+:A\times(A\times A)\to A;\big(x,(y,z)\big)\mapsto x+(y-z)$. For those familiar with group theory, this choice should seem obvious as $A$ is a principle homogeneous space of $(\vec{A},+)$, however for those that aren't, the real advantage here is that the entirety of $\vec{A}$ and it's action on $A$ can be defined in terms of this operation.
-
-This is done by first recognizing that $\forall x\in A\,\forall v\in \vec{A}\,\,\exists!\, y\in A$ satisfying $x+v=y$ which equates $v$ and $y-x$. Fixing a point $x$, we can vary the second point $y$ over all of $A$ and generate the vector space $\vec{A}$. The choice to fix our initial point $x$ is essentially the same as labeling $x$ as the origin of $A$ and transforming it into a vector space. 
-
-![[Drawing 2025-05-12 03.31.54.excalidraw 1.svg]]
-
-The following are some helpful identities and properties along with their derivations that can be found for the subtraction operation:
+As the displacement from $p$ to $q$ is unique, we may denote it by $q-p$ and define the map
+$$
+\begin{aligned}
+-:A\times A&\to\vec{A}; \\
+(p,q)&\mapsto q-p,
+\end{aligned}
+$$
 
 
-1. $(z-x)+(y-z)=y-x \implies z-x=(y-x)-(y-z)=(y-x)+(z-y)$
-2. $z-x=(z-y)+(y-x)$ and $y-x=(y-z)+(z-x)\implies z-x=(z-y)+(y-z)+(z-x)$$\implies(z-y)+(y-z)=0\implies y-z=-(z-y)$
-3. $y+(z-x)=x+(y-x)+(z-x)$
-4. $(z-x)=0\implies(x-z)=0=(z-x)\implies z+(x-z)=x=z$
-##### Formal Vectorization of $A$
-If you have a decent mathematical background and are interested in how the rigorous sausage is made , it's easy to show how fixing an element $x$ is equivalent to choosing an origin by establishing a one to one correspondence between $A$ with some induced structure and the additive group $(\vec{A},+)$ using subtraction. 
+which takes each pair of points to the displacement vector from the first to the second. From this definition of subtraction we then obtain the identities
 
-First we should make our process of generating vectors more precise by defining an explicit map using currying (fixing one input):  $\phi_{x}:=-_{x}:A\to \vec{A};y\mapsto y-x$. It would be prudent to notice that $\forall y\in A\,\,x+\phi_{x}(y)=y$ as it simplifies many derivations.
-
-As an example of the utility of the identity above, to prove that $\phi_{x}$ plays nicely with vector addition, we choose a point $w:=y+v$. Since there always exists another point $z$ such that $v=(z-x)=\phi_{x}(z)$, we might as well replace $v$ with $\phi_{x}(z)$.
-
-$w=y+\phi_{x}(z)$ can be rewritten using identity (3) and the observation we made earlier to yield $w=x+\phi_{x}(w)=x+\phi_{x}(y)+\phi_{x}(z)$, which using identity (4) give us that $\phi_{x}(w)=\phi_{x}(y)+\phi_{x}(z)$, or $\phi_{x}(y+v)=\phi_{x}(y+\phi_{x}(z))=\phi_{x}(y)+\phi_{x}(z)$.
-![[Drawing 2025-05-12 03.31.54.excalidraw 2.svg]]
-
-###### Group Structure
-Continuing with establishing the bijection between $A$ and $\vec{A}$,  we should investigate the induced structure on $A$ by $\phi_{x}$.
-
-Converting point addition into a binary operation by currying the third argument of our modified addition gives the map $+_{x}:A\times A\to A;(y,z)\mapsto y+\phi_{x}(z)$ whose output may be denoted by $y+_{x}z$ whenever doing so does not obscure the mechanics of the operation.
-Using subtraction identity (3), note that $y+_{x}z=y+\phi_{x}(z)=x+\phi_{x}(y)+\phi_{x}(z)$. 
+$$ p+(q-p)=q,\qquad (p+v)-p=v. $$
 
 
-By defining the map $+_{x}$ in the way that we have, we actually induced a group structure on the set $A$ as the map can be shown to satisfy all 3 of the group axioms:
+#### Example 1: Solution Sets of Linear Equations
 
-1. The addition operation as defined above has a unique identity element, $x$: $\forall z\in A\,\,\,x+_{x}z=x+\phi_{x}(z)=z$ and $\forall y\in A\,\,\,y+_{x}x=y+\phi_{x}(x)=y$. 
+Let $L:V\to W$ be a linear map between $\mathbb{F}$-vector spaces, and $b\in W$ some vector for which the solution set $$ A:=L^{-1}(b)=\{x\in V:L(x)=b\} $$
+is nonempty. For any $x\in A$ and $v\in\ker L$ we have by linearity$$ L(x+v)=L(x)+L(v)=b, $$
+so addition in $V$ restricts to an action $$\begin{aligned} +:A\times\ker L&\to A;  \\
+ (x,v)&\mapsto x+v. \end{aligned}$$As $\ker L$ is a vector subspace of $V$, this action is free since addition in $V$ is. Given any two solutions $x,y\in A$ we also have $$ L(y-x)=L(y)-L(x)=0\iff y-x\in\ker L, $$
+so the action is transitive, and thus $(A,\ker L,+)$ is an affine space.
+
+For the trivial example, taking $L=0$ and $b=0$ in particular makes every vector a solution, so every vector space $V$ is an affine space over itself, acting on its own points by vector addition.
+
+Less trivially, given the linear map $$\begin{aligned}
+L:\mathbb{R}^3&\to \mathbb{R}; \\
+(x_{1},x_{2},x_{3})&\mapsto x_{1}+x_{2}+x_{3},
+\end{aligned}$$the plane $$ H_1:=\{x\in\mathbb{R}^3:x_1+x_2+x_3=1\} $$is the solution set of $L(x)=x_1+x_2+x_3=b=1$, and is thus an affine space modeled on the plane $u_1+u_2+u_3=0$. 
+
+![[affine-spaces-solution-plane.svg|center|429]]
 
 
-This element is guaranteed to be unique in the first case by the fact that any other point $y$ that satisfies $y+\phi_{x}(x)=z$ can be rewritten as $x+\phi_{x}(y)$ giving $x+\phi_{x}(y)+\phi_{x}(z)=x+\phi_{x}(z)$ which implies $\phi_{x}(y)=0$ or by (4) $y=x$, and in the second case simply applying (4) directly to $y+\phi_{x}(z)=y$ tells us that $z$ must equal $x$.
+Finally, letting $I\subseteq\mathbb{R}$ be a nonempty open interval, the derivative
+
+$$\begin{aligned}  
+\frac{d}{dt}:C^1(I)&\to C^0(I); \\  
+g&\mapsto g'  
+\end{aligned}$$
+
+is a linear map whose kernel, by the mean value theorem, consists precisely of the constant functions on $I$. Given a continuous function $f\in C^0(I)$, the solution set of the equation $g'=f$ is then the set of anti-derivatives $$\int f(s)\,ds:=\{ g\in C^1(I):g'=f \},$$ which is nonempty by the fundamental theorem of calculus: for any $a\in I$, the function
+
+$$G_a(t):=\int_a^t f(s)\,ds$$
+
+satisfies $G_a'=f$, and is thus a solution. Choosing a different base point $b\in I$ gives a different choice of anti-derivative $G_{b}$, whose displacement from $G_{a}$ is given by the constant function
+
+$$G_{b}-G_a=\int_{b}^{a}f(s)\,ds.$$
+Thus the set of anti-derivatives of $f$ forms an affine space over the constant functions on $I$, with translation corresponding to the identity $$\int_{a}^cf(s)\,ds=\int_{b}^cf(s)\,ds+\int_{a}^{b}f(s)\,ds.$$ 
+
+![[affine-spaces-antiderivatives.svg|center|428]]
+
+#### Chasles' Identity and Some Corollaries
+
+Given an affine space $\mathcal{A}=(A,\vec{A},+)$ and two points $p,r\in A$, we know from the definition of point subtraction that the unique solution to the equation
+$$
+p+v=r
+$$
+is the vector
+$$
+v=r-p.
+$$
+Letting $q\in A$ be some third intermediate point, we also know that
+$$
+p+(q-p)=q,\quad q+(r-q)=r.
+$$
+Hence we may conclude from the compatibility of the action with vector addition that
+$$
+\begin{aligned}
+p+\bigl((q-p)+(r-q)\bigr) &=\bigl(p+(q-p)\bigr)+(r-q) \\
+&=q+(r-q) \\
+&=r.
+\end{aligned}
+$$
+As $r-p$ is the unique displacement taking $p$ to $r$, we obtain _Chasles’ identity_,
+$$
+(q-p)+(r-q)=r-p.
+$$
+Equivalently, taking $p$ as a common base point or $r$ as a common endpoint, we get the following displacement identities:
+$$
+\begin{aligned}
+r-q&=(r-p)-(q-p), \\[6pt]
+q-p&=(r-p)-(r-q).
+\end{aligned}
+$$
+
+![[affine-spaces-chasles.svg|center|360]]
+
+Letting $p=r$ in Chasles' identity then gives
+$$
+(q-p)+(p-q)=p-p=0,
+$$
+or
+$$
+p-q=-(q-p).
+$$
+
+We may also use Chasles’ identity to determine how the displacement $q-p$ changes when its endpoints are translated. Writing $u,v\in\vec{A}$ for the respective displacements of $p$ and $q$, we may take the original endpoints as intermediate points in passing from $p+u$ to $q+v$. The resulting displacement is then given by
+
+$$
+\begin{aligned}
+(q+v)-(p+u) &=\bigl((q+v)-q\bigr)+\bigl(q-(p+u)\bigr) \\
+&=\bigl((q+v)-q\bigr)+(q-p)+\bigl(p-(p+u)\bigr) \\
+&=(q-p)+(v-u).
+\end{aligned}
+$$
+
+![[affine-spaces-endpoint-translation.svg|center|378]]
+ 
+In particular, when $v=u$ we have
+$$ (q+v)-(p+v)=q-p, $$ 
+so translating both endpoints by the same vector leaves their displacement unchanged.
+
+#### Example 2: The Parallelogram Law
+
+Exchanging the starting points of two displacements preserves their sum, as by Chasles' identity
+
+$$\begin{aligned} (q-p)+(r-s) &=(q-s)+\bigl((s-p)+(r-s)\bigr)  \\
+ &=(q-s)+(r-p). \end{aligned}$$
+
+Adding the displacements $q-p$ and $r-p$ to the point $p$ in either order therefore gives the same fourth vertex of a parallelogram:
+
+$$\begin{aligned} q+(r-p) &=p+\bigl((q-p)+(r-p)\bigr)  \\
+ &=r+(q-p). \end{aligned}$$
+  Finally, the exchange and reversal identities give
+
+$$ (q-p)-(s-r)=(r-p)-(s-q), $$
+
+and hence
+
+$$ q-p=s-r\iff r-p=s-q. $$
+
+Thus equality of the displacements along one pair of opposite sides guarantees equality along the other pair.
+
+![[affine-spaces-parallelogram.svg|center|319]]
+
+---
+## Identification of Translations and Displacements
+
+We saw [[#Chasles' Identity and Some Corollaries|above]] that translating both endpoints of a displacement by the same vector leaves the displacement unchanged. Doing this to every point at once, by fixing a displacement $v\in\vec{A}$
+in the addition operation and allowing the starting point $p\in A$ to vary, gives the translation  
+
+$$  
+\begin{aligned}  
+\tau_v:A&\to A; \\  
+p&\mapsto p+v,  
+\end{aligned}  
+$$
+
+which moves the whole of $A$ by $v$.
+
+![[affine-spaces-translation.svg|center|459]]
+
+Defining such a translation for each vector in $\vec{A}$ and collecting them gives the set
+$$
+\mathcal{T}(\mathcal{A}):=\{\tau_v\in A^A:v\in\vec{A}\}.
+$$
+Under composition these translations form a group isomorphic to $(\vec{A},+)$, with composing two translations corresponding to adding their displacements: given $u,v\in\vec{A}$, translating a point $p\in A$ first by $v$ and then by $u$ gives
+$$
+\begin{aligned}
+(\tau_u\circ\tau_v)(p)
+&=(p+v)+u \\
+&=p+(u+v) \\
+&=\tau_{u+v}(p).
+\end{aligned}
+$$
+As this holds for every point $p\in A$, we obtain
+$$
+\tau_u\circ\tau_v=\tau_{u+v}.
+$$
+In particular, zero displacement gives the identity translation, and reversing a displacement gives the inverse translation:
+$$
+\tau_0=\operatorname{id}_A,\qquad \tau_v\circ\tau_{-v}=\tau_{-v}\circ\tau_v=\tau_0.
+$$
+
+Thus every translation is a bijection, and $\mathcal{T}(\mathcal{A})$ is a subgroup of the group $\operatorname{Sym}(A)$ of all bijections from $A$ to itself under composition. As vector addition is commutative, this subgroup is Abelian, with $\tau_u\circ\tau_v=\tau_v\circ\tau_u$. Its action on $A$ by evaluation is also transitive, as any two points $p,q\in A$ satisfy
+$$
+\tau_{q-p}(p)=p+(q-p)=q.
+$$
+
+Since the displacement taking a point to its translate is unique, distinct displacements determine distinct translations; for if $\tau_u=\tau_v$, then for any $p\in A$,
+$$
+u=(p+u)-p=(p+v)-p=v.
+$$
+Thus the map
+$$
+\begin{aligned}
+\tau:\vec{A}&\to\mathcal{T}(\mathcal{A}); \\
+v&\mapsto\tau_v
+\end{aligned}
+$$
+is a bijection, and as it takes addition of displacements to composition of translations, a group isomorphism.
+
+Transferring the scalar multiplication on $\vec{A}$ through $\tau$ by defining
+$$
+\lambda\tau_v:=\tau_{\lambda v},
+$$
+each vector space axiom on $\mathcal{T}(\mathcal{A})$ follows from the corresponding axiom on $\vec{A}$, such as
+$$
+\lambda(\tau_u\circ\tau_v)=\lambda\tau_{u+v}=\tau_{\lambda u+\lambda v}=(\lambda\tau_u)\circ(\lambda\tau_v).
+$$
+Hence $\tau$ is a linear isomorphism between the space of displacements and the space of translations. 
+
+---
+## The Intrinsic Model of an Affine Space $\star$
+
+The definition above describes affine spaces with respect to a predetermined action by an external space of displacements, with the geometry of the resultant affine space fully specified by this choice. We may instead describe this geometry intrinsically, by specifying which permutations of the point set constitute translations, and how scalars act on them.
+#### A Torsor of Translations
+
+To begin, let $A$ be any nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ be an Abelian subgroup whose right action by evaluation
+$$
+\begin{aligned}
+\operatorname{ev}:A\times\mathcal{T}&\to A; \\
+(p,t)&\mapsto t(p)
+\end{aligned}
+$$
+is transitive. Although we have only required this action to be transitive, we can show that it must also be free: if a translation $t\in\mathcal{T}$ fixes any point $p\in A$, then for every translation $s\in\mathcal{T}$ we have by commutativity
+$$
+t(s(p))=s(t(p))=s(p).
+$$
+Since the action is transitive, $s(p)$ ranges over all of $A$. Hence $t$ fixes every point, and as an element of $\operatorname{Sym}(A)$ it must be $\operatorname{id}_A$, so the action is free.
+
+A set equipped with such a free and transitive action is called a _torsor_ under the acting group. Writing the group operations and action additively as
+$$
+t+s:=t\circ s,\qquad 0:=\operatorname{id}_A,\qquad -t:=t^{-1},\qquad p+t:=t(p),
+$$
+for arbitrary points $p,q\in A$ and translations $t,s\in\mathcal{T}$ we have
+$$
+p+(t+s)=(p+t)+s,\qquad \exists!u\in\mathcal{T}:p+u=q,
+$$
+where the first identity follows from commutativity, as
+$$
+p+(t+s)=t(s(p))=s(t(p))=(p+t)+s.
+$$
+These are the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
+
+As the translation taking any point $p$ to any point $q$ is unique by the freedom of the action, we may once again denote it by $q-p$ and define the map
+$$
+\begin{aligned}
+-:A\times A&\to\mathcal{T}; \\
+(p,q)&\mapsto q-p,
+\end{aligned}
+$$
+which takes each pair of points to the translation taking the first to the second. Just like with addition, this map satisfies the subtractive conditions
+$$
+p+(q-p)=q,\qquad (p+t)-p=t.
+$$
+
+#### Compatible Scalar Multiplication and Induced Model Space
+
+To construct an affine space over a field $\mathbb{F}$ from a torsor, all we require is a compatible scalar multiplication map
+$$
+\begin{aligned}
+\cdot:\mathbb{F}\times\mathcal{T}&\to\mathcal{T}; \\
+(\lambda,t)&\mapsto\lambda t
+\end{aligned}
+$$
+satisfying, for every $\lambda,\mu\in\mathbb{F}$ and $t,s\in\mathcal{T}$,
+$$
+\begin{aligned}
+\lambda(\mu t)&=(\lambda\mu)t, & 1t&=t, \\
+\lambda(t+s)&=\lambda t+\lambda s, & (\lambda+\mu)t&=\lambda t+\mu t.
+\end{aligned}
+$$
+As these properties make $\mathcal{T}$ an $\mathbb{F}$-vector space, defining $(\vec{A},+):=(\mathcal{T},\operatorname{ev})$ gives a free and transitive group action by a vector space on $A$. We thus obtain our original description of an affine space as a triple $\mathcal{A}:=(A,\vec{A},+)$ from the intrinsic data $(A,\mathcal{T},\cdot)$.
+
+While in most applications the appropriate scalar multiplication is already supplied by the ambient algebraic structure on the point set, in general any such operation can be specified equivalently by a ring homomorphism
+$$
+\rho:\mathbb{F}\to\operatorname{End}(\mathcal{T}),
+$$
+where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the underlying Abelian group. Here addition is defined pointwise and multiplication by composition, so that for arbitrary $\alpha,\beta\in\operatorname{End}(\mathcal{T})$,
+$$
+(\alpha+\beta)(t):=\alpha(t)\circ\beta(t),\qquad (\alpha\beta)(t):=\alpha(\beta(t)).
+$$
+Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$, with scalar multiplication defined by
+$$
+\lambda t:=\rho(\lambda)(t).
+$$
+Comparing with the four axioms above, $\rho(\lambda)$ preserving addition is distributivity over translations, while $\rho$ preserving products, identities, and sums are the remaining three axioms.
+
+The two descriptions carry the same data. Starting from an affine space 
+$\mathcal{A}=(A,\vec{A},+)$, the linear isomorphism $\tau:\vec{A}\to\mathcal{T}(\mathcal{A})$ satisfies $\tau_v(p)=p+v$, meaning that the [[Notation#Diagrams|diagram]]
+![[affine-spaces-cd-action-evaluation.svg|center|244]]
+commutes, so displacing a point by $v$ and evaluating the translation $\tau_v$ there are the same operation. Starting instead from intrinsic data $(A,\mathcal{T},\cdot)$, each displacement $t$ of the induced affine space determines a translation satisfying $\tau_t(p)=p+t=t(p)$, so translating by $t$ is applying $t$, with $\tau$ being the identity on $\mathcal{T}$.
+
+#### Example 3: Integer Scalars and the Circle
+
+Every Abelian group admits a canonical scalar multiplication by integers given by repeated addition, which for a torsor of translations is repeated composition:
+$$
+nt:=\underbrace{t\circ\cdots\circ t}_{n},\qquad 0t:=\operatorname{id}_A,\qquad (-n)t:=-(nt),\qquad n>0.
+$$
+As $\mathcal{T}$ is Abelian, this multiplication satisfies the four axioms above with $\mathbb{Z}$ in place of $\mathbb{F}$, so every torsor is an affine space over $\mathbb{Z}$. Moreover, this is the only integer multiplication that may be defined, as a ring homomorphism $\mathbb{Z}\to\operatorname{End}(\mathcal{T})$ must send $1$ to $\operatorname{id}_{\mathcal{T}}$. Since $(\mathbb{Z},+)$ is generated by $1$, its value on every other integer is fixed by additivity.
+
+Over a field, such a scalar multiplication need not exist. Letting $S^1\subseteq\mathbb{C}$ be the unit circle, its group of rotations $U(1)$ consists of the maps
+$$
+\begin{aligned}
+r_\theta:S^1&\to S^1; \\
+z&\mapsto e^{i\theta}z,
+\end{aligned}
+$$
+which commute and carry any point to any other, thus making $S^1$ a torsor under the Abelian group $U(1)$. The half turn $r_\pi$ satisfies
+$$
+r_\pi+r_\pi=r_{2\pi}=0,\qquad r_\pi\neq0,
+$$
+so any compatible scalar multiplication by a field of characteristic $0$ would give
+$$
+r_\pi=\tfrac{1}{2}(2r_\pi)=\tfrac{1}{2}(r_\pi+r_\pi)=\tfrac{1}{2}\,0=0,
+$$
+which is a contradiction. Over a field of characteristic $\ell>0,$ we would instead have
+$\ell t=(\ell\cdot1)t=0$ for every translation $t$. Applied to the rotation by a single radian $r_1$, this gives  
+
+$$r_\ell=\ell r_1=0,$$
+
+so the integer $\ell$ would have to be a nonzero integer multiple of $2\pi$. As $2\pi$ is irrational, this is not possible, and thus the circle, together with its rotations, is a torsor which is not an affine space over any field.
+
+![[affine-spaces-circle-rotations.svg|center|232]]
 
 
-2. The associativity of $+_{x}$ follows from the associativity of $+$: $w+_{x}(y+_{x}z)=x+\phi_{x}(w)+\phi_{x}(y+_{x}z)=x+\phi_{x}(w)+\phi_{x}(y)+\phi_{x}(z)=x+\phi_{x}(w+_{x}y)+\phi_{x}(z)=(w+_{x}y)+_{x}z$
+#### Example 4: Different Translations on the Same Point Set
 
-3. Every element has an inverse:                   $\forall y\in A\,\,\,(x-\phi_{x}(y))+_{x}\phi_{x}(y)=x-\phi_{x}(y)+\phi_{x}(y)=x$ which lets us label the element $x-\phi_{x}(y)$ as $-y$
+Letting $\mathcal{T}:=\{\tau_a:a\in\mathbb{R}\}$ be the set of translations $\tau_a(x)=x+a$ given by having $\mathbb{R}$ act on itself by addition, we may also consider the maps
+$$
+\begin{aligned}
+t_a:\mathbb{R}&\to\mathbb{R}; \\
+x&\mapsto\sqrt[3]{x^3+a}.
+\end{aligned}
+$$
+Composing two of these gives
+$$
+(t_a\circ t_b)(x)=\sqrt[3]{\left(\sqrt[3]{x^3+b}\right)^3+a}=\sqrt[3]{x^3+a+b}=t_{a+b}(x),
+$$
+so $\mathcal{T}':=\{t_a:a\in\mathbb{R}\}$ is an Abelian subgroup of $\operatorname{Sym}(\mathbb{R})$. As $t_{y^3-x^3}(x)=y$ its action is transitive, and defining $\lambda t_a:=t_{\lambda a}$ gives a compatible scalar multiplication. In both $\mathcal{T}$ and $\mathcal{T}'$ the translation taking $0$ to $1$ is indexed by $a=1$, yet halving it gives
+$$
+0+\tfrac{1}{2}\tau_1=\tfrac{1}{2},\qquad 0+\tfrac{1}{2}t_1=\sqrt[3]{1/2},
+$$
+so the two describe different affine structures on the same point set.
 
-This group multiplication does more than just turn $A$ into a group however, it also turns the map $\phi_{x}$ into a group homomorphism (and in fact an isomorphism) which is the last step of establishing the correspondence.
+The two are nonetheless isomorphic. Indexing each set of translations by $\mathbb{R}$ through the linear isomorphisms $a\mapsto\tau_a$ and $a\mapsto t_a$, the evaluation maps of the two structures become
+$$
+\begin{aligned}
+\operatorname{ev}:\mathbb{R}\times\mathbb{R}&\to\mathbb{R}; & \operatorname{ev}':\mathbb{R}\times\mathbb{R}&\to\mathbb{R}; \\
+(x,a)&\mapsto x+a, & (x,a)&\mapsto\sqrt[3]{x^3+a},
+\end{aligned}
+$$
+and the cube map $h(x)=x^3$ makes the square
+![[affine-spaces-cd-cube-relabeling.svg|center|167]]
+commute. Thus $h$ carries the action of every displacement $a$ in the second structure to its action in the first while leaving $a$ itself unchanged. The two structures therefore differ only by relabeling points through $h$, which carries the halfway point $\sqrt[3]{1/2}$ between $0$ and $1$ in the second structure to the halfway point $\tfrac{1}{2}$ in the first.
 
-###### Group Isomorphism
-The map $\phi_{x}$ has already been shown to be a map between groups, however in order to be a group homomorphism it must satisfy the requirement that $\phi_{x}(y+_{x}z)=\phi_{x}(y)+\phi_{x}(z)$. It turns out we've already done this when we showed the compatibility of vector and point addition: $\phi_{x}(y+_{x}z)=\phi_{x}(y+\phi_{x}(z))=\phi_{x}(y)+\phi_{x}(z)$. Easy right?
+![[affine-spaces-cube-relabeling.svg|center|496]]
 
-In order to show that this homomorphism is an isomorphism, we must establish that it is both a monomorphism and an epimorphism. Once again, we've already proven both: $\forall y\in A\,\,\,\phi_{x}(y)$ is the unique element satisfying $x+v=y$. We already know no other point $z$ could be mapped to this same $v$, as if it could $x+\phi_{x}(z)=z=x+\phi_{x}(y)=y$ or $z=y$.
+#### Example 5: Different Scalars on the Same Torsor
 
-Similarly $\phi_{x}$ is an epimorphism as fixing the point $x$, $\forall v\in \vec{A}\,\,\,\exists!y\in A$ such that $x+v=y$ which as we know, means that $v=(y-x)=\phi_{x}(y)$.
+Letting $\mathcal{T}:=\{\tau_v:v\in\mathbb{C}\}$ be the set of translations $\tau_v(z)=z+v$ defined by letting $\mathbb{C}$ act on itself through addition, we may define the map $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ to be the ring homomorphism corresponding to the scalar multiplication $\lambda\tau_v:=\tau_{\lambda v}.$  Composing $\rho$ with the field automorphism 
 
-Thus the choice of origin $x$ allows us to identify $(A,+_{x})$ with the additive group of $(\vec{A},+)$.
+$$  
+\begin{aligned}  
+\sigma:\mathbb{C}&\to\mathbb{C}; \\  
+z&\mapsto\bar{z}  
+\end{aligned}  
+$$
 
-![[Drawing 2024-08-10 16.33.35.excalidraw 2.svg]]
+gives a second ring homomorphism $\bar{\rho}:=\rho\circ\sigma$, which acts by
+$$
+\bar{\rho}(\lambda)(\tau_v)=\tau_{\bar{\lambda}v}.
+$$
 
-###### Vector Operations
-The final step in the formal vectorization of $A$ is to take it from a group into a vector space. By showing that $(A,+_{x})\cong(\vec{A},+)$, we've basically already done this. If we require the map $\phi_{x}^{-1}$ to be a linear isomorphism and define scalar multiplication on $A$ in a way that is compatible with this (ex. $\phi_{x}(ay)=a\phi_{x}(y)$ or $a\phi_{x}(y)+b\phi_{x}(y)=(a+b)\phi_{x}(y)=\phi_{x}(a+b)y$ ) and we're done. We don't have to worry about what field we construct the vector space over or any other complications, we have converted $A$ into an isomorphic vector space to $\vec{A}$ by simply "choosing an origin".
+As $\sigma$ fixes every real number, $\rho|_{\mathbb{R}}=\bar{\rho}|_{\mathbb{R}}$, and so give $\mathcal{T}$ the same structure as a real vector space. Writing $at:=\rho(a)(t)=\bar{\rho}(a)(t)$ for this shared real scalar multiplication, for arbitrary 
+$a,b\in\mathbb{R}$ and $t\in\mathcal{T}$ we have by the distributive and associative scalar axioms
 
-The opposite can of course be done too. Taking a vector space ${V}$ we can "forget" about the origin by removing the operations defined on it, and this new affine space has as it's associated vector space $V$ itself. In this way the choice of origin of a vector space is arbitrary, one could merely start from the affine space $(V,V,+,-)$, choose any vector $v$ as the origin using the process performed earlier, and generate an isomorphic vector space with the only difference being which vector is the zero vector. 
+$$\rho(a+bi)(t)=at+b\,\rho(i)(t),\qquad \bar{\rho}(a+bi)(t)=at+b\,\bar{\rho}(i)(t),$$
 
+so the two scalar multiplications differ only in the action of $i$. Defining $J:=\rho(i)$, we have  
+
+$$\bar{\rho}(i)=\rho(-i)=-J,\qquad J^2=\rho(i^2)=\rho(-1)=-\operatorname{id}_{\mathcal{T}},$$
+
+where $J$ is real-linear as $i$ commutes with every real number. A real-linear map squaring to $-\operatorname{id}$ is called a _complex structure_, so $J$ and $-J$ are both complex structures on the real vector space $\mathcal{T}$. Geometrically, $J(\tau_v)=\tau_{iv}$ rotates each translation a quarter turn counterclockwise, while $-J$ rotates each a quarter turn clockwise, and the two complex affine structures on $\mathbb{C}$ differ only in which quarter turn is taken to be multiplication by $i$.
+
+![[affine-spaces-quarter-turns.svg|center|310]]
+
+
+---
+## Choosing an Origin
+
+An affine space has no naturally distinguished point which could be called the origin: translating the entire space by a displacement leaves every displacement between its points unchanged, so the translated space is indistinguishable from the original. Fixing a point $o$ in the first argument of subtraction breaks this symmetry, as the displacement $p-o$ changes when $p$ alone is translated, and differs from point to point. Measuring every point from a chosen origin in this way turns $A$ itself into a vector space, with operations dependent on the point chosen.
+
+
+#### The Canonical Model of an Affine Space
+
+Let $\mathcal{A}=(A,\vec{A},+)$ be an arbitrary affine space. Given a fixed point $o\in A$ and arbitrary vector 
+$v\in\vec{A}$, the equation $p-o=v$ has the unique solution $p=o+v$. Thus fixing $o$ and identifying every point $p\in A$ with the vector $p-o$ gives the bijection
+$$
+\begin{aligned}
+\phi_o:A&\to\vec{A}; \\
+p&\mapsto p-o,
+\end{aligned}
+$$
+with inverse
+$$
+\begin{aligned}
+\phi_o^{-1}:\vec{A}&\to A; \\
+v&\mapsto o+v.
+\end{aligned}
+$$
+Under $\phi_o$, the addition of a displacement vector becomes vector addition, and subtraction of points becomes vector subtraction, as by Chasles' identity and its common base point form
+$$
+\phi_o(p+v)=\bigl((p+v)-p\bigr)+(p-o)=\phi_o(p)+v,\qquad \phi_o(q)-\phi_o(p)=(q-o)-(p-o)=q-p.
+$$
+These are the operations of a vector space acting on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
+![[affine-spaces-cd-canonical-model.svg|center|418]]
+commute, with the operations of $\mathcal{A}$ along the top and those of $\mathcal{A}_{\vec{A}}$ along the bottom. Choosing a base point $o\in A$ thus identifies $\mathcal{A}$ with $\mathcal{A}_{\vec{A}}$, which we call the _canonical model_ of $\mathcal{A}$.
+
+#### Induced Vector Space Structures
+
+We may also apply this identification in reverse, pulling back the operations on $\vec{A}$ to define a vector space structure on $A$. Requiring $\phi_o$ to be linear leaves only one choice for each operation, given by the maps
+$$
+\begin{aligned}
++_o:A\times A&\to A; \\
+(p,q)&\mapsto\phi_o^{-1}\bigl(\phi_o(p)+\phi_o(q)\bigr), \\[6pt]
+\cdot_o:\mathbb{F}\times A&\to A; \\
+(\lambda,p)&\mapsto\phi_o^{-1}\bigl(\lambda\phi_o(p)\bigr).
+\end{aligned}
+$$
+As $\phi_o$ is a bijection, each of the vector space axioms follows from the corresponding axiom on $\vec{A}$, so $\vec{A}_o:=(A,+_o,\cdot_o)$ is a vector space with zero vector $o=\phi_o^{-1}(0)$, and $\phi_o$ is a linear isomorphism.
+
+To see that no other choice is possible, let $\oplus$ be any addition on $A$ for which $\phi_o$ is linear. Then $\phi_o(p\oplus q)=\phi_o(p)+\phi_o(q)$, meaning that the square
+![[affine-spaces-cd-induced-addition.svg|center|179]]
+commutes. As its vertical maps are bijections, applying $\phi_o^{-1}$ [[Notation#Diagrams|determines]] its top map as $p\oplus q=p+_o q$, and the same argument applies to scalar multiplication.
+
+Geometrically, the addition operation on $\vec{A}_o$ corresponds to [[#Example 2 The Parallelogram Law|completing the parallelogram]] with fixed vertex $o$ and variable vertices $p,q$, which can be seen from the equation
+$$
+p+_o q=o+(p-o)+(q-o)=p+(q-o)=q+(p-o)=q+_o p.
+$$
+
+Scalar multiplication on the other hand corresponds to translating $p$ along the (possibly degenerate) line connecting $o$ and $p$, as
+$$
+\lambda\cdot_o p=o+\lambda(p-o)=p+(1-\lambda)(o-p),
+$$
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$, which gives $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+![[affine-spaces-induced-operations.svg|center|678]]
+
+
+#### Comparing Origins
+
+Choosing two distinct origins $o,o'\in A$ gives the linear isomorphisms
+$$
+\begin{aligned}
+\phi_o:\vec{A}_o&\to\vec{A}, \\[6pt]
+\phi_{o'}:\vec{A}_{o'}&\to\vec{A},
+\end{aligned}
+$$
+which label each point $p\in A$ by its position vectors $p-o$ and $p-o'$ respectively. Both vectors lie in $\vec{A}$, which is at once the point set of the canonical model $\mathcal{A}_{\vec{A}}$ and the space of displacements in $\mathcal{A}$.
+
+Reading position vectors as points of the canonical model, $\phi_o$ and $\phi_{o'}$ identify the canonical affine spaces $\mathcal{A}_{\vec{A}_o}$ and $\mathcal{A}_{\vec{A}_{o'}}$ with $\mathcal{A}_{\vec{A}}$. As both spaces share the point set $A$, each point $p\in A$ corresponds to the two points $p-o$ and $p-o'$ of the canonical model, which are related by the transition map
+$$
+\begin{aligned}
+\phi_{o'}\circ\phi_o^{-1}:\vec{A}&\to\vec{A}; \\
+v&\mapsto(o+v)-o'=v+(o-o'),
+\end{aligned}
+$$
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|Chasles' identity]]. This map translates the canonical model by the nonzero vector $o-o'$, and so moves the zero vector and is not linear. As the square
+![[affine-spaces-cd-origins-points.svg|center|184]]
+commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.
+
+Reading position vectors instead as displacements, $\phi_o$ and $\phi_{o'}$ identify both $\vec{A}_o$ and $\vec{A}_{o'}$ with the space of displacements $\vec{A}$, and comparing the two through it takes each point of $\vec{A}_o$ to the point of $\vec{A}_{o'}$ with the same label. This comparison is given by the composite map
+$$
+\begin{aligned}
+\phi_{o'}^{-1}\circ\phi_o:\vec{A}_o&\to\vec{A}_{o'}; \\
+p&\mapsto o'+(p-o)=p+(o'-o),
+\end{aligned}
+$$
+where the second equality follows from [[#Example 2 The Parallelogram Law|the parallelogram law]]. This is the translation $\tau_{o'-o}$, and as the commuting square
+![[affine-spaces-cd-origins-displacements.svg|center|150]]
+has the identity as its right-hand map, $\tau_{o'-o}$ is a linear isomorphism, carrying sums in $\vec{A}_o$ to sums in $\vec{A}_{o'}$ and taking one origin to the other:
+$$
+\tau_{o'-o}(p+_o q)=\tau_{o'-o}(p)+_{o'}\tau_{o'-o}(q),\qquad \tau_{o'-o}(o)=o'.
+$$
+
+In both readings, the change of origin acts by a translation. Reading position vectors as points, the translation acts on the position vectors themselves, and so moves them. Reading them as displacements, it acts on their endpoints $o$ and $p$, which by [[#Chasles' Identity and Some Corollaries|translating both endpoints]]
+leaves them unchanged.
+
+![[affine-spaces-comparing-origins.svg|center|648]]
+
+
+## Exercises
+
+_Problems marked $\star$ use the starred sections of this article or material beyond a first course in linear algebra. Throughout, $\mathcal{A}=(A,\vec{A},+)$ is an affine space over a field $\mathbb{F}$._
+
+## Warm-Up: Identities
+
+#### Problem 1: Consequences of the Axioms
+
+Using only the conditions
+$$
+p+(u+v)=(p+u)+v,\qquad \exists!w\in\vec{A}:p+w=q,
+$$
+together with the definition of $q-p$ as the unique displacement taking $p$ to $q$, prove the following for all $p,q,r,s\in A$ and $u,v\in\vec{A}$.
+
+1. $p+0=p$.
+2. $p-p=0$, and $q-p=0$ if and only if $q=p$.
+3. If $p+u=p+v$ then $u=v$, and if $p+v=q+v$ then $p=q$.
+4. $(p+v)-q=(p-q)+v$ and $p-(q+v)=(p-q)-v$, without using Chasles' identity.
+5. The identity $(q-p)-(s-r)=(r-p)-(s-q)$ used in Example 2.
+
+> [!hint]- Hint
+> For 1, let $w$ be the unique displacement with $p+w=p$ and compute $p+(w+w)$. For 4, check that $q+\bigl((p-q)+v\bigr)=p+v$ and appeal to uniqueness. For 5, rewrite every displacement with $p$ as its base point.
+
+#### Problem 2: Closed Polygons and Midpoints
+
+A _midpoint_ of two points $p,q\in A$ is a point $m\in A$ with $m-p=q-m$.
+
+1. Show that any points $p_0,\dots,p_n\in A$ satisfy $\sum_{i=1}^{n}(p_i-p_{i-1})=p_n-p_0$, and that the displacements around a closed polygon, where $p_n=p_0$, sum to $0$.
+2. Suppose $\operatorname{char}\mathbb{F}\neq2$. Show that any two points $p,q\in A$ have a unique midpoint $m$, and that $m=p+\tfrac{1}{2}(q-p)=q+\tfrac{1}{2}(p-q)$.
+3. Suppose $\operatorname{char}\mathbb{F}=2$. Show that $p$ and $q$ have a midpoint only when $p=q$, and that every point of $A$ is then a midpoint of $p$ and itself.
+4. Suppose again $\operatorname{char}\mathbb{F}\neq2$. Show that the midpoint of $p$ and $q$ is $\tfrac{1}{2}\cdot_o p+_o\tfrac{1}{2}\cdot_o q$ for every origin $o\in A$.
+
+> [!hint]- Hint
+> For 2, write $m=p+w$ and solve for $w$. For 4, the right-hand side is $o+\tfrac{1}{2}(p-o)+\tfrac{1}{2}(q-o)$; subtract $p$ from it using Chasles' identity.
+
+## Heaps $\star$
+
+#### Problem 3: Affine Spaces as Heaps
+
+Informally, a heap is a set with an operation behaving like $a-b+c$, but with no zero element. Explicitly, a _heap_ is a set $H$ together with a map
+$$
+\begin{aligned}
+\langle\cdot,\cdot,\cdot\rangle:H\times H\times H&\to H; \\
+(a,b,c)&\mapsto\langle a,b,c\rangle
+\end{aligned}
+$$
+satisfying, for all $a,b,c,d,e\in H$,
+$$
+\begin{aligned}
+\bigl\langle\langle a,b,c\rangle,d,e\bigr\rangle&=\bigl\langle a,\langle d,c,b\rangle,e\bigr\rangle=\bigl\langle a,b,\langle c,d,e\rangle\bigr\rangle, \\[6pt]
+\langle a,a,b\rangle&=b=\langle b,a,a\rangle.
+\end{aligned}
+$$
+A heap is _Abelian_ if additionally $\langle a,b,c\rangle=\langle c,b,a\rangle$ for all $a,b,c\in H$.
+
+1. Show that $\langle p,q,r\rangle:=p+(r-q)$ makes the point set $A$ an Abelian heap.
+
+Conversely, let $H$ be a nonempty Abelian heap, and for $p,q\in H$ define
+$$
+\begin{aligned}
+t_{p,q}:H&\to H; \\
+x&\mapsto\langle x,p,q\rangle.
+\end{aligned}
+$$
+
+2. Show that $t_{p,q}(p)=q$, that $t_{p,p}=\operatorname{id}_H$, and that $t_{q,r}\circ t_{p,q}=t_{p,r}$.
+3. Show that $t_{a,b}\circ t_{c,d}=t_{c,\langle d,a,b\rangle}$, and deduce that $\mathcal{T}_H:=\{t_{p,q}:p,q\in H\}$ is an Abelian subgroup of $\operatorname{Sym}(H)$ under which $H$ is a torsor.
+4. Show that the two constructions undo each other: the maps $t_{p,q}$ built from the heap of part 1 are the translations $\tau_{q-p}$, and the operation $p+(r-q)$ of $H$ as a torsor under $\mathcal{T}_H$ is the original operation $\langle p,q,r\rangle$.
+5. Show that an affine space over $\mathbb{F}$ may be described intrinsically by a nonempty Abelian heap $H$ together with a compatible scalar multiplication on $\mathcal{T}_H$.
+6. The empty set is a heap. Show that $\mathcal{T}_\varnothing$ is not a group.
+
+> [!hint]- Hint
+> For 1, part 4 of Problem 1 gives $(c+v)-b=(c-b)+v$, which verifies the first line of axioms, and the parallelogram law gives commutativity. For the commutativity of $\mathcal{T}_H$ in 3, fix $e\in H$ and show that $x+_e y:=\langle x,e,y\rangle$ makes $H$ an Abelian group in which
+>  $\langle x,y,z\rangle=x-_e y+_e z$. The point $e$ plays the same role as the origin of an induced vector space $\vec{A}_o$.
+
+## Solution Sets
+
+#### Problem 4: Antiderivatives and Choosing an Origin
+
+Let $I\subseteq\mathbb{R}$ be a nonempty open interval and $f\in C^0(I)$. By Example 1, the set $\int f(s)\,ds$ of antiderivatives of $f$ is the point set of an affine space whose model space consists of the constant functions on $I$, which we identify with $\mathbb{R}$ by identifying each constant function with its value. For $a\in I$, write $G_a(t):=\int_a^t f(s)\,ds$ for the antiderivative vanishing at $a$.
+
+1. Show that for each $a\in I$, the evaluation map $\operatorname{ev}_a:\int f(s)\,ds\to\mathbb{R};\ g\mapsto g(a)$ is a bijection with $\operatorname{ev}_a(g+c)=\operatorname{ev}_a(g)+c$ for every $c\in\mathbb{R}$. Deduce from this that for every $y_0\in\mathbb{R}$, there is exactly one antiderivative $g$ of $f$ with $g(a)=y_0$.
+2. Show that the identification $\phi_{G_a}:\int f(s)\,ds\to\mathbb{R};\ g\mapsto g-G_a$ given by choosing $G_a$ as the origin is $\operatorname{ev}_a$.
+3. Show that for $a,b\in I$, the transition map $\phi_{G_b}\circ\phi_{G_a}^{-1}$ sends each $y_0\in\mathbb{R}$ to $g(b)$, where $g$ is the antiderivative of $f$ with $g(a)=y_0$, and express it as a formula in $y_0$.
+
+> [!hint]- Hint
+> For 2, $g-G_a$ is constant, so it equals its value at $a$. For 3, use part 2 for the first claim, and the identity at the end of Example 1 for the formula.
+
+#### Problem 5: Antiderivatives on Disconnected Intervals
+
+Let $U:=(-\infty,0)\cup(0,\infty)$, and let $K$ be the kernel of the linear map $$\frac{d}{dt}:C^1(U)\to C^0(U).$$
+
+1. Show that $K$ consists of the functions that are constant on each of $(-\infty,0)$ and $(0,\infty)$, and that it is spanned by the function $k_-$, equal to $1$ on $(-\infty,0)$ and $0$ on $(0,\infty)$, together with the function $k_+:=1-k_-$.
+2. Show that every $f\in C^0(U)$ has an antiderivative on $U$.
+
+By Example 1 and part 2, for each $f\in C^0(U)$ the triple $\bigl(\int f(s)\,ds,K,+\bigr)$ is an affine space.
+
+3. Find all antiderivatives of $f(t)=1/t$ on $U$.
+4. Show that the functions $\ln\lvert t\rvert+C$ with $C\in\mathbb{R}$ are exactly the displacements of $\ln\lvert t\rvert$ by constant functions on $U$, and that $\int f(s)\,ds\neq \{ \ln |t|+C\in C^{1}(U):C\in \mathbb{R} \}$.
+
+> [!hint]- Hint
+> For 1, apply the mean value theorem on each interval separately. For 2, apply the fundamental theorem of calculus on each interval separately.
+
+#### Problem 6: Solution Sets of a Linear Map
+
+Let $L:V\to W$ be a linear map between $\mathbb{F}$-vector spaces.
+
+1. Show that $L^{-1}(b)$ is nonempty if and only if $b\in\operatorname{im}L$.
+2. Show that for each $v\in V$, the translation $x\mapsto x+v$ of $V$ restricts to a bijection from $L^{-1}(b)$ to $L^{-1}\bigl(b+L(v)\bigr)$.
+3. Show that the nonempty solution sets $L^{-1}(b)$ are exactly the sets $x+\ker L$, and that each $x\in V$ lies in exactly one of them.
+
+Now let $b:=(3,9)\in\mathbb{R}^2$, and let
+$$
+\begin{aligned}
+L:\mathbb{R}^3&\to\mathbb{R}^2; \\
+(x_1,x_2,x_3)&\mapsto(x_1+2x_2-x_3,\ 2x_1+4x_2+x_3).
+\end{aligned}
+$$
+
+4. Find a point of $L^{-1}(b)$ and a basis of $\ker L$, and check that the displacement between the solutions $(4,0,1)$ and $(0,2,1)$ lies in $\ker L$.
+
+#### Problem 7: Monic Polynomials and a Differential Equation
+
+For $n\in\mathbb{N}$, write $\mathbb{F}[x]_{\leq n}$ for the vector space of polynomials over $\mathbb{F}$ of degree at most $n$.
+
+1. Find a linear map $L$ on $\mathbb{F}[x]_{\leq n}$ and a scalar $b$ for which $L^{-1}(b)$ is the set of monic polynomials of degree $n$, and show that $\ker L=\mathbb{F}[x]_{\leq n-1}$.
+
+Now let
+$$
+\begin{aligned}
+L:C^2(\mathbb{R})&\to C^0(\mathbb{R}); \\
+y&\mapsto y''+y,
+\end{aligned}
+$$
+and assume the standard fact that $\ker L=\operatorname{span}\{\cos,\sin\}$. Let $b\in C^0(\mathbb{R})$ be the function $b(t)=t$.
+
+2. Find $L^{-1}(b)$.
+3. Show that $L^{-1}(b)\to\mathbb{R}^2;\ y\mapsto\bigl(y(0),y'(0)\bigr)$ is a bijection, and that displacing a solution $y$ by $u\in\ker L$ adds $\bigl(u(0),u'(0)\bigr)$ to its image.
+4. Find the solution $y$ with $y(0)=y'(0)=0$.
+
+> [!hint]- Hint
+> For 1, take $L$ to be the coefficient of $x^n$. For 2, look for a solution that is a polynomial.
+
+## Further Problems
+
+#### Problem 8: Relabeling Points $\star$
+
+Let $\mathcal{B}=(B,\vec{B},+)$ be an affine space, $A$ a set, and $h:A\to B$ a bijection, and define
+$$
+\begin{aligned}
++_h:A\times\vec{B}&\to A; \\
+(p,v)&\mapsto h^{-1}\bigl(h(p)+v\bigr).
+\end{aligned}
+$$
+
+1. Show that $(A,\vec{B},+_h)$ is an affine space.
+2. Show that the affine structure on $\mathbb{R}$ given by the maps $t_a$ of Example 4 is the case 
+	$A=B=\mathbb{R}$, $h(x)=x^3$, with $\mathcal{B}$ the canonical affine space of $\mathbb{R}$.
+
+As $\mathbb{R}^2$ and $\mathbb{R}$ have the same cardinality, there is a bijection $\mathbb{R}^2\to\mathbb{R}$.
+
+3. Show that the point set $\mathbb{R}^2$ admits an affine structure with model space $\mathbb{R}$, and that the point set $\mathbb{R}$ admits one with model space $\mathbb{R}^2$.
+4. Show that no bijection $\mathbb{R}^2\to\mathbb{R}$ is continuous.
+
+> [!hint]- Hint
+> For 4, restrict the bijection to the unit circle. It attains its maximum and minimum there at two distinct points, and by the intermediate value theorem each of the two arcs between these points is mapped onto the whole interval between the two values.
+
+#### Problem 9: Why the Translations Commute $\star$
+
+1. Show that $\operatorname{Sym}(\{1,2,3\})$ acts transitively but not freely on $\{1,2,3\}$ by evaluation, and find a subgroup of $\operatorname{Sym}(\{1,2,3\})$ under which $\{1,2,3\}$ is a torsor.
+2. Let $A$ be a finite nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ an Abelian subgroup acting transitively. Show that $\lvert\mathcal{T}\rvert=\lvert A\rvert$.
+
+> [!hint]- Hint
+> For 2, fix $p\in A$ and show that $t\mapsto t(p)$ is a bijection $\mathcal{T}\to A$.
+
+#### Problem 10: Torsors Over Prime Fields $\star$
+
+Let $A$ be a torsor under an Abelian subgroup $\mathcal{T}\leq\operatorname{Sym}(A)$, with integer multiples $nt$ as in Example 3. For a prime $\ell$, write $\mathbb{F}_\ell$ for the field $\mathbb{Z}/\ell\mathbb{Z}$.
+
+1. Show that $\mathcal{T}$ admits a compatible scalar multiplication by $\mathbb{F}_\ell$ if and only if $\ell t=0$ for every 
+	$t\in\mathcal{T}$, and that this scalar multiplication is then unique.
+2. Show that if $\mathcal{T}$ admits a compatible scalar multiplication by $\mathbb{Q}$, it admits only one.
+
+Now let $A:=\{0,1,2,3\}$, and let $\mathcal{T}\leq\operatorname{Sym}(A)$ consist of the four maps $x\mapsto x+k\bmod4$ with 
+$k\in A$.
+
+3. Show that $\mathcal{T}$ admits no compatible scalar multiplication by any field.
+4. Find an Abelian subgroup $\mathcal{T}'\leq\operatorname{Sym}(A)$, different from $\mathcal{T}$, under which $A$ is a torsor and which admits a compatible scalar multiplication by $\mathbb{F}_2$.
+
+> [!hint]- Hint
+> For 1 and 2, compose a ring homomorphism out of $\mathbb{F}_\ell$ or $\mathbb{Q}$ with the quotient map $\mathbb{Z}\to\mathbb{F}_\ell$ or the inclusion $\mathbb{Z}\to\mathbb{Q}$, and compare with Example 3. In 2, $\rho(1/n)$ must be the inverse of $\rho(n)$. For 3, follow the argument for the circle in Example 3. For 4, write the points in binary.
+
+#### Problem 11: Complex Structures on the Plane $\star$
+
+Let $\mathcal{T}$ be the translations of the canonical affine space of $\mathbb{R}^2$, with the real scalar multiplication $\lambda\tau_v:=\tau_{\lambda v}$, and identify $\mathcal{T}$ with $\mathbb{R}^2$ through the linear isomorphism $v\mapsto\tau_v$.
+
+1. Show that every compatible scalar multiplication $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ agreeing with the real one on $\mathbb{R}$ satisfies $\rho(a+bi)=a\operatorname{id}_{\mathcal{T}}+b\,\rho(i)$, and that conversely, for every complex structure $J$ on $\mathcal{T}$, the formula $\rho(a+bi):=a\operatorname{id}_{\mathcal{T}}+bJ$ defines such a scalar multiplication.
+2. Show that a linear map $J\in\operatorname{End}(\mathbb{R}^2)$ satisfies $J^2=-\operatorname{id}$ if and only if $\operatorname{tr}J=0$ and $\det J=1$.
+3. Deduce that the complex structures on $\mathbb{R}^2$ are the maps $J(x,y)=(ax+by,\ cx-ay)$ with $a,b,c\in\mathbb{R}$ and $a^2+bc=-1$.
+4. Show that exactly two of these are rotations, namely the quarter turns $\pm J$ of Example 5.
+
+> [!hint]- Hint
+> For the first claim in 1, follow Example 5; for the converse, expand $(a+bJ)(c+dJ)$. For 2, the Cayley–Hamilton theorem gives $J^2-(\operatorname{tr}J)J+(\det J)\operatorname{id}=0$ for every $J\in\operatorname{End}(\mathbb{R}^2)$.
+
+#### Problem 12: Relativistic Velocity Addition $\star$
+
+Let $A:=(-1,1)$, thought of as velocities measured as fractions of the speed of light. For $a\in\mathbb{R}$, define
+$$
+\begin{aligned}
+t_a:A&\to A; \\
+x&\mapsto\frac{x+\tanh a}{1+x\tanh a}.
+\end{aligned}
+$$
+
+1. Show that $\operatorname{atanh}\bigl(t_a(x)\bigr)=\operatorname{atanh}(x)+a$ for every $x\in A$, and deduce that $\mathcal{T}:=\{t_a:a\in\mathbb{R}\}$ is an Abelian subgroup of $\operatorname{Sym}(A)$ under which $A$ is a torsor.
+
+Give $\mathcal{T}$ the compatible scalar multiplication $\lambda t_a:=t_{\lambda a}$.
+
+2. Show that for $v\in A$, the point $0+\tfrac{1}{2}(v-0)$ halfway from $0$ to $v$ is $v/\bigl(1+\sqrt{1-v^2}\bigr)$, and that it is greater than $v/2$ when $0<v<1$.
+
+> [!hint]- Hint
+> For 1, use the addition formula for $\tanh$. For 2, the displacement from $0$ to $v$ is $t_{\operatorname{artanh}v}$, and $\tanh(u/2)=\sinh u/(1+\cosh u)$.
+
+#### Problem 13: A Change of Origin as a Linear Map
+
+Let $V:=\vec{A}\times\mathbb{F}$, and let
+$$
+\begin{aligned}
+\ell:V&\to\mathbb{F}; \\
+(v,\lambda)&\mapsto\lambda.
+\end{aligned}
+$$
+By Example 1, $\bigl(\ell^{-1}(1),\ker\ell,+\bigr)$ is an affine space, with point set $\vec{A}\times\{1\}$ and model space
+$\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o:A\to\vec{A};\ p\mapsto p-o$ be the identification given by choosing $o$ as the origin, and define $$\psi_o:A\to\vec{A}\times\{1\};\ p\mapsto\bigl(\phi_o(p),1\bigr).$$
+
+1. Show that $\psi_o$ is a bijection with $\psi_o(p+v)=\psi_o(p)+(v,0)$ and $\psi_o(q)-\psi_o(p)=(q-p,0)$ for all $p,q\in A$ and $v\in\vec{A}$.
+2. Let $o'\in A$ be a second origin. Show that there is exactly one linear map $S:V\to V$ with
+3. $S\circ\psi_o=\psi_{o'}$ and $S(v,0)=(v,0)$ for every $v\in\vec{A}$, and that $S(v,\lambda)=\bigl(v+\lambda(o-o'),\lambda\bigr)$.
+4. Show that $S(v,1)=\bigl((\phi_{o'}\circ\phi_o^{-1})(v),1\bigr)$ for every $v\in\vec{A}$.
+
+> [!hint]- Hint
+> For 2, every vector of $V$ is the sum of a vector in $\vec{A}\times\{0\}$ and a multiple of $(0,1)=\psi_o(o)$, and Chasles' identity gives $(p-o)+(o-o')=p-o'$.
 
