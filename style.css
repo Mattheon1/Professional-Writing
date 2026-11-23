@@ -3,3 +3,8 @@
 
 /* Portfolio pages share the existing reading typography. */
 .portfolio-eyebrow{margin-top:2.7rem}.download{font-family:system-ui,sans-serif;margin:0 0 2rem}.download a{display:inline-block;padding:.65rem 1rem;border:1px solid var(--blue);text-decoration:none}.download a:hover{background:var(--soft)}.portfolio-page .prose h2{border-top:1px solid var(--line);padding-top:1.5rem}.portfolio-page .prose>h2:first-child{border:0;padding-top:0}.portfolio-page .prose h3{margin-bottom:.35rem}.portfolio-page .prose h3+p{margin-top:0}.portfolio-page .prose{font-size:1.05rem}.site-header{flex-wrap:wrap}.site-header nav{flex-wrap:wrap;gap:1.4rem}@media(max-width:580px){.site-header{align-items:flex-start;flex-direction:column}.site-header nav{gap:1.3rem}.portfolio-page .article-top h1{font-size:2.35rem}}@media print{.download{display:none}}
+.prose .note-image.centered{margin-left:auto;margin-right:auto}
+details.callout>summary.callout-title{display:list-item;cursor:pointer;margin:.6rem 0}
+details.callout:not([open])>summary.callout-title{margin-bottom:.6rem}
+.prose .display-equation.at-start{margin-top:0}.prose .display-equation.at-end{margin-bottom:0}
+.prose p:has(>.inline-equation)>.note-image.at-start{margin-top:.5rem}.prose p:has(>.inline-equation)>.note-image.at-end{margin-bottom:.75rem}
