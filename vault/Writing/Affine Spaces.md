@@ -478,7 +478,7 @@ $$
 $$
 which label each point $p\in A$ by its position vectors $p-o$ and $p-o'$ respectively. Both vectors lie in $\vec{A}$, which is at once the point set of the canonical model $\mathcal{A}_{\vec{A}}$ and the space of displacements in $\mathcal{A}$.
 
-Reading position vectors as points of the canonical model, $\phi_o$ and $\phi_{o'}$ identify the canonical affine spaces $\mathcal{A}_{\vec{A}_o}$ and $\mathcal{A}_{\vec{A}_{o'}}$ with $\mathcal{A}_{\vec{A}}$. As both spaces share the point set $A$, each point $p\in A$ corresponds to the two points $p-o$ and $p-o'$ of the canonical model, which are related by the transition map
+Reading position vectors as points, $\phi_o$ and $\phi_{o'}$ identify the canonical affine spaces $\mathcal{A}_{\vec{A}_o}$ and $\mathcal{A}_{\vec{A}_{o'}}$ with $\mathcal{A}_{\vec{A}}$. As both spaces share the point set $A$, each point $p\in A$ corresponds to the two points $p-o$ and $p-o'$ of the canonical model, which are related by the transition map
 $$
 \begin{aligned}
 \phi_{o'}\circ\phi_o^{-1}:\vec{A}&\to\vec{A}; \\
