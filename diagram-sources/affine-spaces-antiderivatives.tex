@@ -13,11 +13,11 @@
 \begin{document}
 \begin{tikzpicture}[x=1.1cm,y=0.9cm]
   \draw[-{Stealth[length=2mm]},gray] (-0.3,0) -- (6.9,0) node[below,text=black]{$t$};
-  \foreach \c in {-2,-1.5,-0.5,0.5,1} \draw[gray!45,line width=0.5pt,domain=0:5.9,samples=80] plot (\x,{sin(\x r)+\c});
+  \foreach \c in {-2,-1.5,0.5,1} \draw[gray!45,line width=0.5pt,domain=0:5.9,samples=80] plot (\x,{sin(\x r)+\c});
   \draw[cB,line width=0.9pt,domain=0:5.9,samples=80] plot (\x,{sin(\x r)}) node[right,text=black]{$G_a$};
   \draw[cC,line width=0.9pt,domain=0:5.9,samples=80] plot (\x,{sin(\x r)-1}) node[right,text=black]{$G_b$};
-  \foreach \t in {0.6,3.6,5.2} \draw[disp,cA,shorten <=1pt,shorten >=1pt] (\t,{sin(\t r)}) -- (\t,{sin(\t r)-1});
-  \node[right,font=\small] at (3.6,{sin(3.6 r)-0.5}) {$G_b-G_a$};
+  \foreach \t in {0.6,2.6,4.712} \draw[disp,cA,shorten <=1pt,shorten >=1pt] (\t,{sin(\t r)}) -- (\t,{sin(\t r)-1});
+  \node[left,font=\small] at (4.64,-1.21) {$G_b-G_a$};
   \node[pt,label=below:$a$] at (0,0) {};
   \node[pt,label={[label distance=2pt]below:$b$}] at ({pi/2},0) {};
 \end{tikzpicture}

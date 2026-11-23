@@ -75,7 +75,7 @@ md.inline.ruler.before('escape','obsidian_math',(state,silent)=>{
  if(!silent){const t=state.push('math_inline','',0);t.content=state.src.slice(begin,end);t.meta={display};}
  state.pos=end+delimiter.length;return true;
 });
-md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation'+(tokens[i].meta.edge||''):'inline-equation'}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}</span>`;
+md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation'+(tokens[i].meta.edge||''):'inline-equation'+(tokens[i].content.length>55?' long':'')}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}${esc(tokens[i].meta.trail||'')}</span>`;
 md.inline.ruler.before('link','wikilink',(state,silent)=>{
  const start=state.pos,embedded=state.src.startsWith('![[',start);if(!embedded&&!state.src.startsWith('[[',start))return false;
  const end=state.src.indexOf(']]',start+(embedded?3:2));if(end===-1)return false;
@@ -164,7 +164,16 @@ function render(source,file,{headings:trueHeadings=true}={}){
  }
  // Mark display equations and images that open or close a paragraph, so CSS can keep paragraph spacing uniform.
  for(let i=1;i<tokens.length;i++){
-  if(tokens[i].type!=='inline'||tokens[i-1].type!=='paragraph_open')continue;
+  if(tokens[i].type!=='inline')continue;
+  // Keep punctuation that directly follows inline math on the same line as the formula.
+  const children=tokens[i].children||[];
+  for(let j=0;j<children.length-1;j++){
+   const k=children[j],next=children[j+1];
+   if(k.type!=='math_inline'||k.meta?.display||next.type!=='text')continue;
+   const trail=next.content.match(/^[.,;:!?)\]\u2019\u201d'"]+/);
+   if(trail){k.meta.trail=trail[0];next.content=next.content.slice(trail[0].length);}
+  }
+  if(tokens[i-1].type!=='paragraph_open')continue;
   const kids=(tokens[i].children||[]).filter(k=>k.type!=='softbreak'&&!(k.type==='text'&&!k.content.trim()));
   const isBlock=k=>k&&((k.type==='math_inline'&&k.meta?.display)||(k.type==='wikilink'&&k.meta?.embedded));
   if(isBlock(kids[0]))kids[0].meta.edge=(kids[0].meta.edge||'')+' at-start';
