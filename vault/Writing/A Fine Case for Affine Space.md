@@ -4,7 +4,7 @@ title: A Fine Case for Affine Space
 slug: a-fine-case-for-affine-space
 subject: Affine geometry
 status: Introduction to Affine Spaces
-description: Why distinguish points from vectors? A short motivation for affine spaces.
+description: A short motivation for affine spaces.
 order: 30
 ---
 

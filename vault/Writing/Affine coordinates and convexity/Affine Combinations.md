@@ -5,7 +5,7 @@ subject: Affine coordinates and convexity
 slug: affine-combinations
 status: Working note
 order: 50
-description: When a linear combination of points is independent of the choice of origin.
+description: Origin independent combinations
 ---
 
 ## Linear Combinations of Points

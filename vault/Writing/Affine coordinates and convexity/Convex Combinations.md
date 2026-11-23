@@ -5,7 +5,7 @@ subject: Affine coordinates and convexity
 slug: convex-combinations
 status: Working note
 order: 100
-description: What changes when the coefficients of an affine combination must be nonnegative.
+description: Affine combinations with non-negative coefficients
 ---
 
 ## Convex Combinations of Points

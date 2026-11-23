@@ -1,10 +1,10 @@
 ---
 publish: true
-title: "Quiver"
-slug: "quiver"
-subject: "Category theory"
-status: "Working note"
-description: "Directed multigraphs and their relationship to the objects and morphisms of a category."
+title: Quiver
+slug: quiver
+subject: Category theory
+status: Working note
+description: Directed multigraphs and their relationship to categories
 order: 20
 ---
 

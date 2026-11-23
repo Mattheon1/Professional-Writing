@@ -1,10 +1,10 @@
 ---
 publish: true
-title: "Category"
-slug: "category"
-subject: "Category theory"
-status: "Working note"
-description: "Objects, morphisms, composition, and identity; an introduction to the language of categories."
+title: Category
+slug: category
+subject: Category theory
+status: Working note
+description: An introduction to categories.
 order: 10
 ---
 
