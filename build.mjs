@@ -75,7 +75,7 @@ md.inline.ruler.before('escape','obsidian_math',(state,silent)=>{
  if(!silent){const t=state.push('math_inline','',0);t.content=state.src.slice(begin,end);t.meta={display};}
  state.pos=end+delimiter.length;return true;
 });
-md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation':'inline-equation'}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}</span>`;
+md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation'+(tokens[i].meta.edge||''):'inline-equation'}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}</span>`;
 md.inline.ruler.before('link','wikilink',(state,silent)=>{
  const start=state.pos,embedded=state.src.startsWith('![[',start);if(!embedded&&!state.src.startsWith('[[',start))return false;
  const end=state.src.indexOf(']]',start+(embedded?3:2));if(end===-1)return false;
@@ -94,7 +94,7 @@ md.renderer.rules.wikilink=(tokens,i,options,env)=>{
    const altOption=imageOptions.find(o=>o!==sizeOption&&o.trim()&&o.trim().toLowerCase()!=='center');
    const label=altOption||path.basename(target,path.extname(target));
    const alt=target==='Screenshot from 2025-08-25 02-43-58.png'?'Illustration pairing Euclid, Galileo, and Einstein with geometric ideas.':label;
-   return `<img class="note-image${centered?' centered':''}" src="${esc(assetUrl(asset))}" alt="${esc(alt)}" ${size?`style="max-width:${Math.min(size,4096)}px"`:''} loading="lazy">`;
+   return `<img class="note-image${centered?' centered':''}${tokens[i].meta.edge||''}" src="${esc(assetUrl(asset))}" alt="${esc(alt)}" ${size?`style="max-width:${Math.min(size,4096)}px"`:''} loading="lazy">`;
   }
   reports.missingImages.add(target);return `<span class="omitted-figure" title="${esc(target)}">${/\.md$/.test(target)||!path.extname(target)?'Embedded note':'Diagram'} not included in this copy.</span>`;
  }
@@ -161,6 +161,14 @@ function render(source,file,{headings:trueHeadings=true}={}){
     }
    }
   }
+ }
+ // Mark display equations and images that open or close a paragraph, so CSS can keep paragraph spacing uniform.
+ for(let i=1;i<tokens.length;i++){
+  if(tokens[i].type!=='inline'||tokens[i-1].type!=='paragraph_open')continue;
+  const kids=(tokens[i].children||[]).filter(k=>k.type!=='softbreak'&&!(k.type==='text'&&!k.content.trim()));
+  const isBlock=k=>k&&((k.type==='math_inline'&&k.meta?.display)||(k.type==='wikilink'&&k.meta?.embedded));
+  if(isBlock(kids[0]))kids[0].meta.edge=(kids[0].meta.edge||'')+' at-start';
+  if(isBlock(kids.at(-1)))kids.at(-1).meta.edge=(kids.at(-1).meta.edge||'')+' at-end';
  }
  fixLinks(tokens,file);
  return {html:md.renderer.render(tokens,md.options,env),headings:trueHeadings?headings:[]};

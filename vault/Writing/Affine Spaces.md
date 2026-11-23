@@ -463,6 +463,7 @@ $$
 \lambda\cdot_o p=o+\lambda(p-o)=p+(1-\lambda)(o-p),
 $$
 where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$, which gives $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+
 ![[affine-spaces-induced-operations.svg|center|678]]
 
 

@@ -6,3 +6,5 @@
 .prose .note-image.centered{margin-left:auto;margin-right:auto}
 details.callout>summary.callout-title{display:list-item;cursor:pointer;margin:.6rem 0}
 details.callout:not([open])>summary.callout-title{margin-bottom:.6rem}
+.prose .display-equation.at-start{margin-top:0}.prose .display-equation.at-end{margin-bottom:0}
+.prose p:has(>.inline-equation)>.note-image.at-start{margin-top:.5rem}.prose p:has(>.inline-equation)>.note-image.at-end{margin-bottom:.75rem}
