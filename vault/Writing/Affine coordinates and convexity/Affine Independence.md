@@ -29,7 +29,7 @@ if and only if $\lambda_j=1\ \text{and}\ \forall i\neq j,\ \lambda_i=0$.
 ### Affine Independence via Affine Combinations
 
 In parallel with this definition, given an affine space $\mathcal{A}:=(A,\vec{A},+,-)$ and a set of points
-$$S:=\{p_0,\dots,p_k\}\subseteq A,$$we say that the points of $S$ are *affinely* independent when, for every $p_j\in S$, the only [[Affine Combinations|affine combination]] satisfying
+$$S:=\{p_0,\dots,p_k\}\subseteq A,$$we say that the points of $S$ are *affinely* independent when, for every $p_j\in S$, the only [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations|affine combination]] satisfying
 
 $$
 \sum_{i=0}^k\lambda_i p_i=p_j

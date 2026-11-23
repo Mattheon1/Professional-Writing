@@ -11,7 +11,7 @@ description: Coordinates relative to an ordered affine basis.
 ## Affine Coordinates
 
 Given an $N$-dimensional affine space $\mathcal{A}:=(A,\vec{A},+,-)$ with ordered [[Affine Basis|affine basis]] 
-$$B:=(p_0,p_1,\dots,p_N),$$ every point $p\in A$ may be represented as an [[Affine Combinations|affine combination]]
+$$B:=(p_0,p_1,\dots,p_N),$$ every point $p\in A$ may be represented as an [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations|affine combination]]
 
 $$
 \begin{align}
@@ -51,7 +51,7 @@ The main benefit of using an affine coordinate system is that it allows us to wo
 &=\Psi(p+(q-x)) \\
 &=\Psi(p)+\Phi_{\vec{B}}(q-x).
 \end{align}$$
-Despite these nice properties, it is important to note that the vector space operations on $\mathbb{R}^N$ can only be interpreted in the context of the chosen origin $p_0$, and expressions such as $$ax+by:=\Psi^{-1}(a\Psi(x))+\Psi^{-1}(b\Psi(y))$$for scalars $a,b\in\mathbb{R}$ and $x,y\in A$ are not generally origin independent when interpreted as combinations of points. This is because  $\Psi$ identifies $A$ with $\mathbb{R}^N$ as an affine space over itself, and in general the only well defined sums are those that are [[Affine Combinations|affine combinations]] in $\mathbb{R}^N.$
+Despite these nice properties, it is important to note that the vector space operations on $\mathbb{R}^N$ can only be interpreted in the context of the chosen origin $p_0$, and expressions such as $$ax+by:=\Psi^{-1}(a\Psi(x))+\Psi^{-1}(b\Psi(y))$$for scalars $a,b\in\mathbb{R}$ and $x,y\in A$ are not generally origin independent when interpreted as combinations of points. This is because  $\Psi$ identifies $A$ with $\mathbb{R}^N$ as an affine space over itself, and in general the only well defined sums are those that are [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations|affine combinations]] in $\mathbb{R}^N.$
 
 ## Barycentric Coordinates
 

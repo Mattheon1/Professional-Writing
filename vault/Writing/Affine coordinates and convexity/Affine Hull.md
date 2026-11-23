@@ -8,7 +8,7 @@ order: 60
 description: The affine subspace spanned by a collection of points.
 ---
 
-Given an $N$ dimensional affine space $\mathcal{A}:=(A,\vec{A},+,-)$ and a set of points $$S:=\{ p_{0},\dots,p_{k} \}\subset A,$$the affine hull of $S$ is defined as the set of all [[Affine Combinations|affine combinations]] of the points, or more explicitly $$\operatorname{Aff}(S)=\left\{  \sum_{i=0}^k \lambda_{i}p_{i}:\sum_{i=0}^k\lambda_{i}=1 \right\}.$$
+Given an $N$ dimensional affine space $\mathcal{A}:=(A,\vec{A},+,-)$ and a set of points $$S:=\{ p_{0},\dots,p_{k} \}\subset A,$$the affine hull of $S$ is defined as the set of all [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations|affine combinations]] of the points, or more explicitly $$\operatorname{Aff}(S)=\left\{  \sum_{i=0}^k \lambda_{i}p_{i}:\sum_{i=0}^k\lambda_{i}=1 \right\}.$$
 Choosing $p_{0}$ as the origin, we can realize the affine hull as an affine subspace of dimension $\operatorname{dim}\operatorname{span}\{ (p_{1}-p_{0}),\dots,(p_{k}-p_{0}) \}$ by writing
 $$\begin{align}
 \operatorname{Aff}(S)&=\left\{  \sum_{i=0}^k \lambda_{i}p_{i}:\sum_{i=0}^k\lambda_{i}=1 \right\} \\

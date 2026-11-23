@@ -11,7 +11,7 @@ description: What changes when the coefficients of an affine combination must be
 ## Convex Combinations of Points
 
 Given an affine space $\mathcal{A}:=(A,\vec{A},+,-)$ and a set of points $$S:=\{ p_{0},p_{1}\dots p_{k} \},$$
-an [[Affine Combinations|affine combination]] of the elements of $S$ is an origin independent linear combination of points
+an [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations|affine combination]] of the elements of $S$ is an origin independent linear combination of points
 
 $$\sum_{i=0}^k\lambda_{i}p_{i}$$
 such that $\displaystyle\sum_{i=0}^k\lambda_{i}=1.$
@@ -21,7 +21,7 @@ while the other coefficients are allowed to freely range over $\mathbb{R},$ whic
 
 ## Composition
 
-Just as the composition of affine combinations is itself an affine combination, the composition of convex compositions is a convex composition. The proof of this is relatively similar to the corresponding [[Affine Combinations#Composition|proof for affine combinations]], merely replacing the word affine with convex.
+Just as the composition of affine combinations is itself an affine combination, the composition of convex compositions is a convex composition. The proof of this is relatively similar to the corresponding [[mathematical-writing-site/vault/Writing/Affine coordinates and convexity/Affine Combinations#Composition|proof for affine combinations]], merely replacing the word affine with convex.
 
 Formally, given a set of points $$S:=\{ p_{0},\dots,p_{k} \}$$
 and a set of convex combinations of those points
