@@ -259,7 +259,7 @@ where the first identity follows from commutativity, as
 $$
 p+(t+s)=t(s(p))=s(t(p))=(p+t)+s.
 $$
-These are the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
+These match the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
 
 As the translation taking any point $p$ to any point $q$ is unique by the freedom of the action, we may once again denote it by $q-p$ and define the map
 $$
@@ -678,7 +678,7 @@ $$
 $$
 
 1. Show that $(A,\vec{B},+_h)$ is an affine space.
-2. Show that the affine structure on $\mathbb{R}$ given by the maps $t_a$ of Example 4 is the case 
+2. Show that the affine structure on $\mathbb{R}$ given by the maps $t_a$ of Example 4 arises as the case 
 	$A=B=\mathbb{R}$, $h(x)=x^3$, with $\mathcal{B}$ the canonical affine space of $\mathbb{R}$.
 
 As $\mathbb{R}^2$ and $\mathbb{R}$ have the same cardinality, there is a bijection $\mathbb{R}^2\to\mathbb{R}$.
@@ -801,7 +801,7 @@ More generally, let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a sub
 $$
 \mathcal{S}_W:=\{g\in\operatorname{End}(V):g(V)\subseteq W,\ g(W)=0\},
 $$
-and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are the maps $s_c$.
+and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are given by the maps $s_c$.
 
 3. Show that $\mathcal{S}_W$ is a vector subspace of $\operatorname{End}(V)$, and that $g\circ h=0$ for all $g,h\in\mathcal{S}_W$.
 4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map
