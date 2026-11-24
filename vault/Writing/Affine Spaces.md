@@ -511,7 +511,7 @@ leaves them unchanged.
 
 ## Exercises
 
-_Problems marked $\star$ use the starred sections of this article or material beyond a first course in linear algebra. Throughout, $\mathcal{A}=(A,\vec{A},+)$ is an affine space over a field $\mathbb{F}$._
+_Problems marked $\star$ use the starred sections of this article or material beyond a first course in linear algebra. Problems marked $\star\star$ use ideas from outside the series and are included for fun. Throughout, $\mathcal{A}=(A,\vec{A},+)$ is an affine space over a field $\mathbb{F}$._
 
 ## Warm-Up: Identities
 
@@ -588,10 +588,17 @@ $$
 
 #### Problem 4: Antiderivatives and Choosing an Origin
 
-Let $I\subseteq\mathbb{R}$ be a nonempty open interval and $f\in C^0(I)$. By Example 1, the set $\int f(s)\,ds$ of antiderivatives of $f$ is the point set of an affine space whose model space consists of the constant functions on $I$, which we identify with $\mathbb{R}$ by identifying each constant function with its value. For $a\in I$, write $G_a(t):=\int_a^t f(s)\,ds$ for the antiderivative vanishing at $a$.
+Let $I\subseteq\mathbb{R}$ be a nonempty open interval and $f\in C^0(I)$. By Example 1, the set $\int f(s)\,ds$ of antiderivatives of $f$ is the point set of an affine space whose model space consists of the constant functions on $I$, which we identify with $\mathbb{R}$ by identifying each constant function with its value. For $a\in I$, write $G_a(t):=\int_a^t f(s)\,ds$ for the antiderivative vanishing at $a$, and define
+$$
+\begin{aligned}
+\operatorname{ev}_a:\int f(s)\,ds&\to\mathbb{R}; & \phi_{G_a}:\int f(s)\,ds&\to\mathbb{R}; \\
+g&\mapsto g(a), & g&\mapsto g-G_a,
+\end{aligned}
+$$
+where $\phi_{G_a}$ is the identification given by choosing $G_a$ as the origin.
 
-1. Show that for each $a\in I$, the evaluation map $\operatorname{ev}_a:\int f(s)\,ds\to\mathbb{R};\ g\mapsto g(a)$ is a bijection with $\operatorname{ev}_a(g+c)=\operatorname{ev}_a(g)+c$ for every $c\in\mathbb{R}$. Deduce from this that for every $y_0\in\mathbb{R}$, there is exactly one antiderivative $g$ of $f$ with $g(a)=y_0$.
-2. Show that the identification $\phi_{G_a}:\int f(s)\,ds\to\mathbb{R};\ g\mapsto g-G_a$ given by choosing $G_a$ as the origin is $\operatorname{ev}_a$.
+1. Show that $\operatorname{ev}_a$ is a bijection with $\operatorname{ev}_a(g+c)=\operatorname{ev}_a(g)+c$ for every $c\in\mathbb{R}$. Deduce from this that for every $y_0\in\mathbb{R}$, there is exactly one antiderivative $g$ of $f$ with $g(a)=y_0$.
+2. Show that $\phi_{G_a}=\operatorname{ev}_a$.
 3. Show that for $a,b\in I$, the transition map $\phi_{G_b}\circ\phi_{G_a}^{-1}$ sends each $y_0\in\mathbb{R}$ to $g(b)$, where $g$ is the antiderivative of $f$ with $g(a)=y_0$, and express it as a formula in $y_0$.
 
 > [!hint]- Hint
@@ -643,10 +650,16 @@ L:C^2(\mathbb{R})&\to C^0(\mathbb{R}); \\
 y&\mapsto y''+y,
 \end{aligned}
 $$
-and assume the standard fact that $\ker L=\operatorname{span}\{\cos,\sin\}$. Let $b\in C^0(\mathbb{R})$ be the function $b(t)=t$.
+and assume the standard fact that $\ker L=\operatorname{span}\{\cos,\sin\}$. Let $b\in C^0(\mathbb{R})$ be the function $b(t)=t$, and define
+$$
+\begin{aligned}
+E:L^{-1}(b)&\to\mathbb{R}^2; \\
+y&\mapsto\bigl(y(0),y'(0)\bigr).
+\end{aligned}
+$$
 
 2. Find $L^{-1}(b)$.
-3. Show that $L^{-1}(b)\to\mathbb{R}^2;\ y\mapsto\bigl(y(0),y'(0)\bigr)$ is a bijection, and that displacing a solution $y$ by $u\in\ker L$ adds $\bigl(u(0),u'(0)\bigr)$ to its image.
+3. Show that $E$ is a bijection, and that displacing a solution $y$ by $u\in\ker L$ adds $\bigl(u(0),u'(0)\bigr)$ to $E(y)$.
 4. Find the solution $y$ with $y(0)=y'(0)=0$.
 
 > [!hint]- Hint
@@ -742,7 +755,13 @@ $$
 \end{aligned}
 $$
 By Example 1, $\bigl(\ell^{-1}(1),\ker\ell,+\bigr)$ is an affine space, with point set $\vec{A}\times\{1\}$ and model space
-$\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o:A\to\vec{A};\ p\mapsto p-o$ be the identification given by choosing $o$ as the origin, and define $$\psi_o:A\to\vec{A}\times\{1\};\ p\mapsto\bigl(\phi_o(p),1\bigr).$$
+$\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o$ be the identification given by choosing $o$ as the origin, and define
+$$
+\begin{aligned}
+\phi_o:A&\to\vec{A}; & \psi_o:A&\to\vec{A}\times\{1\}; \\
+p&\mapsto p-o, & p&\mapsto\bigl(\phi_o(p),1\bigr).
+\end{aligned}
+$$
 
 1. Show that $\psi_o$ is a bijection with $\psi_o(p+v)=\psi_o(p)+(v,0)$ and $\psi_o(q)-\psi_o(p)=(q-p,0)$ for all $p,q\in A$ and $v\in\vec{A}$.
 2. Let $o'\in A$ be a second origin. Show that there is exactly one linear map $S:V\to V$ with
@@ -754,10 +773,23 @@ $\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o:A\to\vec{A};\ p\mapsto p-o$ b
 
 #### Problem 14: Lines Through the Origin $\star$
 
-For $a\in\mathbb{R}$, write $U_a:=\operatorname{span}\{(a,1)\}$, and let $\mathcal{U}:=\{U_a:a\in\mathbb{R}\}$. For $c\in\mathbb{R}$, let $s_c:\mathbb{R}^2\to\mathbb{R}^2;\ (x,y)\mapsto(x+cy,\ y)$.
+For $a\in\mathbb{R}$, write $U_a:=\operatorname{span}\{(a,1)\}$, and let $\mathcal{U}:=\{U_a:a\in\mathbb{R}\}$. For $c\in\mathbb{R}$, define
+$$
+\begin{aligned}
+s_c:\mathbb{R}^2&\to\mathbb{R}^2; \\
+(x,y)&\mapsto(x+cy,\ y).
+\end{aligned}
+$$
 
 1. Show that $\mathcal{U}$ is the set of lines through the origin in $\mathbb{R}^2$ other than the $x$-axis, that $U_a=U_b$ only if $a=b$, and that $s_c$ carries $U_a$ onto $U_{a+c}$.
-2. Deduce that the maps $t_c:\mathcal{U}\to\mathcal{U};\ U\mapsto s_c(U)$ form an Abelian subgroup of $\operatorname{Sym}(\mathcal{U})$ acting transitively on $\mathcal{U}$, and that $\lambda t_c:=t_{\lambda c}$ makes $\mathcal{U}$ an affine space.
+2. Deduce that the maps
+   $$
+   \begin{aligned}
+   t_c:\mathcal{U}&\to\mathcal{U}; \\
+   U&\mapsto s_c(U)
+   \end{aligned}
+   $$
+   form an Abelian subgroup of $\operatorname{Sym}(\mathcal{U})$ acting transitively on $\mathcal{U}$, and that $\lambda t_c:=t_{\lambda c}$ makes $\mathcal{U}$ an affine space.
 
 More generally, let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a subspace. A _complement_ of $W$ is a subspace $U\subseteq V$ with $V=W\oplus U$; let $A$ be the set of complements of $W$, and assume it is nonempty. Let
 $$
@@ -766,7 +798,13 @@ $$
 and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are the maps $s_c$.
 
 3. Show that $\mathcal{S}_W$ is a vector subspace of $\operatorname{End}(V)$, and that $g\circ h=0$ for all $g,h\in\mathcal{S}_W$.
-4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map $t_g:A\to A;\ U\mapsto(\operatorname{id}_V+g)(U)$.
+4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map
+   $$
+   \begin{aligned}
+   t_g:A&\to A; \\
+   U&\mapsto(\operatorname{id}_V+g)(U).
+   \end{aligned}
+   $$
 5. Show that $t_g\circ t_h=t_{g+h}$, and that $t_g=\operatorname{id}_A$ only if $g=0$.
 6. Show that $\mathcal{T}:=\{t_g:g\in\mathcal{S}_W\}$ acts transitively on $A$, and deduce that $\lambda t_g:=t_{\lambda g}$ makes $(A,\mathcal{T},\cdot)$ the intrinsic data of an affine space.
 
@@ -775,7 +813,14 @@ and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $
 
 #### Problem 15: Complements as Graphs $\star$
 
-Let $V$, $W$, $A$, $\mathcal{S}_W$ and the maps $t_g$ be as in Problem 14. Fix $U\in A$, and write $\pi_U:V\to U$ for the projection along $W$, sending each $v=w+u$ with $w\in W$ and $u\in U$ to $u$.
+Let $V$, $W$, $A$, $\mathcal{S}_W$ and the maps $t_g$ be as in Problem 14. Fix $U\in A$, and let
+$$
+\begin{aligned}
+\pi_U:V&\to U; \\
+w+u&\mapsto u
+\end{aligned}
+$$
+be the projection along $W$, where $w\in W$ and $u\in U$.
 
 1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
 2. Show that $f\circ\pi_U\in\mathcal{S}_W$, and that $t_{f\circ\pi_U}(U)$ is the graph of $f$.
@@ -784,3 +829,57 @@ Let $V$, $W$, $A$, $\mathcal{S}_W$ and the maps $t_g$ be as in Problem 14. Fix $
 
 > [!hint]- Hint
 > For 1, decompose each $u\in U$ along $V=W\oplus U'$. For 2, check that $\operatorname{id}_V+f\circ\pi_U$ sends each $u\in U$ to $u+f(u)$. For 4, write $U_a$ as a graph over $U_d$.
+
+## For Fun $\star\star$
+
+#### Problem 16: Conics $\star\star$
+
+Let $\mathbb{F}$ be a field with $\operatorname{char}\mathbb{F}\neq2$, and consider the parabola
+$$
+P:=\{(x,y)\in\mathbb{F}^2:y=x^2\}
+$$
+and the hyperbola
+$$
+H:=\{(x,y)\in\mathbb{F}^2:xy=1\}.
+$$
+For $c\in\mathbb{F}$ and $\lambda\in\mathbb{F}^\times$, define
+$$
+\begin{aligned}
+T_c:\mathbb{F}^2&\to\mathbb{F}^2; & D_\lambda:\mathbb{F}^2&\to\mathbb{F}^2; \\
+(x,y)&\mapsto(x+c,\ y+2cx+c^2), & (x,y)&\mapsto(\lambda x,\ \lambda^{-1}y).
+\end{aligned}
+$$
+
+1. Show that each $T_c$ maps $P$ onto itself and that $T_b\circ T_c=T_{b+c}$. Deduce that $P$ is a torsor under the restrictions of the maps $T_c$, and that $\lambda T_c:=T_{\lambda c}$ makes $P$ an affine space.
+2. Show that the midpoint of $(a,a^2)$ and $(b,b^2)$ in $P$, as defined in Problem 2, is $\bigl(\tfrac{a+b}{2},(\tfrac{a+b}{2})^2\bigr)$, and that this is not their midpoint in $\mathbb{F}^2$ unless $a=b$.
+3. Show that $H$ is a torsor under the restrictions of the maps $D_\lambda$, and that for $\mathbb{F}=\mathbb{R}$ this group admits no compatible scalar multiplication by any field.
+
+Now let $\mathbb{F}=\mathbb{C}$, let $C$ be the circle $\{(x,y)\in\mathbb{C}^2:x^2+y^2=1\}$, and for $a,b\in\mathbb{C}$ with $a^2+b^2=1$ define
+$$
+\begin{aligned}
+\psi:\mathbb{C}^2&\to\mathbb{C}^2; & R_{a,b}:\mathbb{C}^2&\to\mathbb{C}^2; \\
+(x,y)&\mapsto(x+iy,\ x-iy), & (x,y)&\mapsto(ax-by,\ bx+ay).
+\end{aligned}
+$$
+
+4. Show that $\psi$ restricts to a bijection $C\to H$, and that $\psi\circ R_{a,b}=D_{a+ib}\circ\psi$.
+
+For a polynomial $g$ of degree $2$ in $x$ and $y$, the _directions at infinity_ of the curve $g=0$ are the lines through the origin on which the degree-$2$ part of $g$ vanishes.
+
+5. Show that over $\mathbb{R}$, the parabola $P$ has one direction at infinity and the hyperbola $H$ has two, and that the circle $x^2+y^2=1$ has none over $\mathbb{R}$ and two over $\mathbb{C}$.
+
+> [!hint]- Hint
+> For 1, $T_{b-a}$ takes $(a,a^2)$ to $(b,b^2)$. For 3, $D_{-1}$ plays the role of the half turn $r_\pi$ in Example 3. For 4, use $(x+iy)(x-iy)=x^2+y^2$ and $(a+ib)(a-ib)=1$. For 5, the degree-$2$ parts are $-x^2$, $xy$ and $x^2+y^2$.
+
+#### Problem 17: Infinitesimal Points $\star\star$
+
+Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with componentwise addition and multiplication $(a+b\varepsilon)(c+d\varepsilon):=ac+(ad+bc)\varepsilon$, so that $\varepsilon^2=0$. For a polynomial $f$ in $n$ variables over $\mathbb{F}$ and $p,v\in\mathbb{F}^n$, the expression $f(p+tv)$ is a polynomial in $t$, and we write $D_vf(p)$ for its coefficient of $t$. Over $\mathbb{R}$, $D_vf(p)$ is the derivative of $f$ at $p$ in the direction $v$.
+
+1. Show that $\mathbb{F}[\varepsilon]$ is a commutative ring, and that every element of $\mathbb{F}[\varepsilon]^n$ can be written uniquely as $p+\varepsilon v$ with $p,v\in\mathbb{F}^n$.
+2. Show that $f(p+\varepsilon v)=f(p)+\varepsilon\,D_vf(p)$, and that $D_vf(p)=f(p+v)-f(p)$ when $f$ has degree at most $1$.
+3. Over $\mathbb{F}_2$, show that $x^2+x$ vanishes at $0$ and $1$, but takes the value $\varepsilon$ at both $\varepsilon$ and $1+\varepsilon$.
+4. Show that $x^4+x^2$ vanishes at every element of $\mathbb{F}_2[\varepsilon]$.
+5. Let $\mathbb{F}_4:=\{0,1,\omega,1+\omega\}$ be the field with four elements, where $\omega^2=1+\omega$. Show that $x^4+x^2$ takes the value $1$ at $\omega$.
+
+> [!hint]- Hint
+> For 2, substitute $t=\varepsilon$ into $f(p+tv)$; every power $t^k$ with $k\geq2$ becomes $0$. For 3 and 4, use $2=0$ in $\mathbb{F}_2$. For 5, compute $\omega^4=(1+\omega)^2$.
