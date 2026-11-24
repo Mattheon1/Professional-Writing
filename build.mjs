@@ -75,9 +75,9 @@ md.inline.ruler.before('escape','obsidian_math',(state,silent)=>{
  if(!silent){const t=state.push('math_inline','',0);t.content=state.src.slice(begin,end);t.meta={display};}
  state.pos=end+delimiter.length;return true;
 });
-// Approximate rendered length of a formula: drop command names, braces and spacing commands.
-const visibleLength=tex=>tex.replace(/\\(operatorname|mathbb|mathcal|mathrm|vec|bigl|bigr|Bigl|Bigr|left|right|tfrac|frac|lvert|rvert)\b|[{}]|\\[,;: ]|\\(?=[a-zA-Z])/g,'').length;
-md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation'+(tokens[i].meta.edge||''):'inline-equation'+(visibleLength(tokens[i].content)>40?' long':'')}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}${esc(tokens[i].meta.trail||'')}</span>`;
+// Approximate rendered length of a formula: drop formatting commands, count other commands as one symbol, ignore braces and spacing.
+const visibleLength=tex=>tex.replace(/\\(operatorname|mathbb|mathcal|mathrm|vec|bigl|bigr|Bigl|Bigr|left|right|tfrac|frac|lvert|rvert)\b/g,'').replace(/\\[a-zA-Z]+/g,'x').replace(/[{}]|\\[,;: ]/g,'').length;
+md.renderer.rules.math_inline=(tokens,i,options,env)=>`<span class="${tokens[i].meta.display?'display-equation'+(tokens[i].meta.edge||''):'inline-equation'+(visibleLength(tokens[i].content)>33?' long':'')}">${renderMath(tokens[i].content,tokens[i].meta.display,env.file)}${esc(tokens[i].meta.trail||'')}</span>`;
 md.inline.ruler.before('link','wikilink',(state,silent)=>{
  const start=state.pos,embedded=state.src.startsWith('![[',start);if(!embedded&&!state.src.startsWith('[[',start))return false;
  const end=state.src.indexOf(']]',start+(embedded?3:2));if(end===-1)return false;
