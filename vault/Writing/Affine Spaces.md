@@ -888,6 +888,12 @@ Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with compone
 > [!hint]- Hint
 > For 2, substitute $t=\varepsilon$ into $f(p+tv)$; every power $t^k$ with $k\geq2$ becomes $0$. For 3 and 4, use $2=0$ in $\mathbb{F}_2$. For 5, compute $\omega^4=(1+\omega)^2$.
 
+---
+## References
+
+- Walter Noll, _Finite-Dimensional Spaces: Algebra, Geometry, and Analysis_, Vol. I, Martinus Nijhoff, 1987, Chapter 3. A corrected reprint is [freely available](https://kilthub.cmu.edu/articles/journal_contribution/Finite-Dimensional_Spaces_Algebra_Geometry_and_Analysis_Volume_I/6477443) from Carnegie Mellon University.
+- A. I. Kostrikin and Yu. I. Manin, _Linear Algebra and Geometry_, translated by M. E. Alferieff, Gordon and Breach, 1989, Chapter 3, §1.
+
 [^1]: $\star$ Apart from Example 3, nothing in this article requires $\mathbb{F}$ to be a field: replacing $\mathbb{F}$ by a ring $R$ and $\vec{A}$ by a left $R$-module, every construction and argument goes through unchanged. Fields (or division rings) become necessary once bases and dimension enter the series.
 
 [^2]: $\star$ For a general subgroup of $\operatorname{Sym}(A)$, evaluation is a left action, as $(t\circ s)(p)=t(s(p))$ applies $s$ first. Since $\mathcal{T}$ is Abelian, the two orders agree, and writing the action on the right matches the notation $p+v$.
