@@ -687,7 +687,7 @@ As $\mathbb{R}^2$ and $\mathbb{R}$ have the same cardinality, there is a bijecti
 > [!hint]- Hint
 > For 4, restrict the bijection to the unit circle. It attains its maximum and minimum there at two distinct points, and by the intermediate value theorem each of the two arcs between these points is mapped onto the whole interval between the two values.
 
-#### Problem 9: Commuting With the Translations $\star$
+#### Problem 9: Commutativity and Free Actions $\star$
 
 1. Show that $\operatorname{Sym}(\{1,2,3\})$ acts transitively but not freely on $\{1,2,3\}$ by evaluation, and find a subgroup of $\operatorname{Sym}(\{1,2,3\})$ under which $\{1,2,3\}$ is a torsor.
 2. Let $A$ be a nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ an Abelian subgroup acting transitively. Show that every $f\in\operatorname{Sym}(A)$ commuting with every $t\in\mathcal{T}$ lies in $\mathcal{T}$, and deduce that no Abelian subgroup of $\operatorname{Sym}(A)$ strictly contains $\mathcal{T}$.
