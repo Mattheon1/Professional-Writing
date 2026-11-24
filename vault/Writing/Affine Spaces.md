@@ -362,7 +362,7 @@ $$
 $$
 so the two describe different affine structures on the same point set.
 
-The two are nonetheless isomorphic. Indexing each set of translations by $\mathbb{R}$ through the linear isomorphisms $a\mapsto\tau_a$ and $a\mapsto t_a$, the evaluation maps of the two structures become
+Indexing each set of translations by $\mathbb{R}$ through the linear isomorphisms $a\mapsto\tau_a$ and $a\mapsto t_a$, the evaluation maps of the two structures become
 $$
 \begin{aligned}
 \operatorname{ev}:\mathbb{R}\times\mathbb{R}&\to\mathbb{R}; & \operatorname{ev}':\mathbb{R}\times\mathbb{R}&\to\mathbb{R}; \\
@@ -391,7 +391,7 @@ $$
 \bar{\rho}(\lambda)(\tau_v)=\tau_{\bar{\lambda}v}.
 $$
 
-As $\sigma$ fixes every real number, $\rho|_{\mathbb{R}}=\bar{\rho}|_{\mathbb{R}}$, and so give $\mathcal{T}$ the same structure as a real vector space. Writing $at:=\rho(a)(t)=\bar{\rho}(a)(t)$ for this shared real scalar multiplication, for arbitrary 
+As $\sigma$ fixes every real number, $\rho|_{\mathbb{R}}=\bar{\rho}|_{\mathbb{R}}$, and so the two give $\mathcal{T}$ the same structure as a real vector space. Writing $at:=\rho(a)(t)=\bar{\rho}(a)(t)$ for this shared real scalar multiplication, for arbitrary 
 $a,b\in\mathbb{R}$ and $t\in\mathcal{T}$ we have by the distributive and associative scalar axioms
 
 $$\rho(a+bi)(t)=at+b\,\rho(i)(t),\qquad \bar{\rho}(a+bi)(t)=at+b\,\bar{\rho}(i)(t),$$
@@ -752,3 +752,35 @@ $\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o:A\to\vec{A};\ p\mapsto p-o$ b
 > [!hint]- Hint
 > For 2, every vector of $V$ is the sum of a vector in $\vec{A}\times\{0\}$ and a multiple of $(0,1)=\psi_o(o)$, and Chasles' identity gives $(p-o)+(o-o')=p-o'$.
 
+#### Problem 14: Lines Through the Origin $\star$
+
+For $a\in\mathbb{R}$, write $U_a:=\operatorname{span}\{(a,1)\}$, and let $\mathcal{U}:=\{U_a:a\in\mathbb{R}\}$. For $c\in\mathbb{R}$, let $s_c:\mathbb{R}^2\to\mathbb{R}^2;\ (x,y)\mapsto(x+cy,\ y)$.
+
+1. Show that $\mathcal{U}$ is the set of lines through the origin in $\mathbb{R}^2$ other than the $x$-axis, that $U_a=U_b$ only if $a=b$, and that $s_c$ carries $U_a$ onto $U_{a+c}$.
+2. Deduce that the maps $t_c:\mathcal{U}\to\mathcal{U};\ U\mapsto s_c(U)$ form an Abelian subgroup of $\operatorname{Sym}(\mathcal{U})$ acting transitively on $\mathcal{U}$, and that $\lambda t_c:=t_{\lambda c}$ makes $\mathcal{U}$ an affine space.
+
+More generally, let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a subspace. A _complement_ of $W$ is a subspace $U\subseteq V$ with $V=W\oplus U$; let $A$ be the set of complements of $W$, and assume it is nonempty. Let
+$$
+\mathcal{S}_W:=\{g\in\operatorname{End}(V):g(V)\subseteq W,\ g(W)=0\},
+$$
+and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are the maps $s_c$.
+
+3. Show that $\mathcal{S}_W$ is a vector subspace of $\operatorname{End}(V)$, and that $g\circ h=0$ for all $g,h\in\mathcal{S}_W$.
+4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map $t_g:A\to A;\ U\mapsto(\operatorname{id}_V+g)(U)$.
+5. Show that $t_g\circ t_h=t_{g+h}$, and that $t_g=\operatorname{id}_A$ only if $g=0$.
+6. Show that $\mathcal{T}:=\{t_g:g\in\mathcal{S}_W\}$ acts transitively on $A$, and deduce that $\lambda t_g:=t_{\lambda g}$ makes $(A,\mathcal{T},\cdot)$ the intrinsic data of an affine space.
+
+> [!hint]- Hint
+> For 1, consider where each line meets the line $y=1$. For 3, the image of $h$ lies in $W$, where $g$ vanishes. For 4, compute $(\operatorname{id}_V+g)\circ(\operatorname{id}_V-g)$, and apply the shear to $V=W\oplus U$. For 5, if $t_g=\operatorname{id}_A$, show that $g(u)\in U\cap W$ for every $u$ in a complement $U$. For 6, given $U$ and $U'$, write each $u\in U$ as $u=w+u'$ with $w\in W$ and $u'\in U'$, and set $g(u):=-w$.
+
+#### Problem 15: Complements as Graphs $\star$
+
+Let $V$, $W$, $A$, $\mathcal{S}_W$ and the maps $t_g$ be as in Problem 14. Fix $U\in A$, and write $\pi_U:V\to U$ for the projection along $W$, sending each $v=w+u$ with $w\in W$ and $u\in U$ to $u$.
+
+1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
+2. Show that $f\circ\pi_U\in\mathcal{S}_W$, and that $t_{f\circ\pi_U}(U)$ is the graph of $f$.
+3. Deduce that the induced vector space structure on $A$ with origin $U$ is given by $\operatorname{graph}f+_U\operatorname{graph}f'=\operatorname{graph}(f+f')$ and $\lambda\cdot_U\operatorname{graph}f=\operatorname{graph}(\lambda f)$.
+4. For $V=\mathbb{R}^2$, $W$ the $x$-axis and $U_a$ as in Problem 14, show that $U_a+_{U_0}U_b=U_{a+b}$, and that $U_a+_{U_d}U_b=U_{a+b-d}$ for every $d\in\mathbb{R}$.
+
+> [!hint]- Hint
+> For 1, decompose each $u\in U$ along $V=W\oplus U'$. For 2, check that $\operatorname{id}_V+f\circ\pi_U$ sends each $u\in U$ to $u+f(u)$. For 4, write $U_a$ as a graph over $U_d$.
