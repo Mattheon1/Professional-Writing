@@ -375,35 +375,7 @@ commute. Thus $h$ carries the action of every displacement $a$ in the second str
 
 ![[affine-spaces-cube-relabeling.svg|center|496]]
 
-#### Example 5: Complements of a Subspace
-
-The complements of a subspace can neither be added nor told apart, yet the shears fixing the subspace make them an affine space. Let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a subspace with at least one complement, and let $A$ be the set of complements of $W$, the subspaces $U\subseteq V$ with $V=W\oplus U$. For every linear map $g:V\to W$ vanishing on $W$, the shear $\operatorname{id}_V+g$ fixes $W$ pointwise and is invertible with inverse $\operatorname{id}_V-g$, as $g\circ g=0$, so it carries complements of $W$ to complements of $W$. Each such $g$ therefore defines a map
-$$
-\begin{aligned}
-t_g:A&\to A; \\
-U&\mapsto(\operatorname{id}_V+g)(U).
-\end{aligned}
-$$
-For two such maps $g,h$, the image of $h$ lies in $W$, where $g$ vanishes, so
-$$
-(\operatorname{id}_V+g)\circ(\operatorname{id}_V+h)=\operatorname{id}_V+g+h+g\circ h=\operatorname{id}_V+g+h,
-$$
-and hence $t_g\circ t_h=t_{g+h}$. The set $\mathcal{T}:=\{t_g\}$ is thus an Abelian subgroup of $\operatorname{Sym}(A)$.
-
-Its action is transitive. Given complements $U,U'\in A$, each $u\in U$ decomposes uniquely as $u=w+u'$ with $w\in W$ and $u'\in U'$, and setting $g(u):=-w$ on $U$ and $g:=0$ on $W$ defines a linear map $g:V\to W$ vanishing on $W$ with $(\operatorname{id}_V+g)(u)=u'$. Every $u'\in U'$ arises in this way, from its component in $U$ along $W$, so $t_g(U)=U'$, and $A$ is a torsor under $\mathcal{T}$. As each shear is a linear automorphism of $V$ fixing $W$, it preserves all the data from which $A$ was built, and since some shear carries any complement to any other, no complement is distinguished from the rest.
-
-Distinct maps give distinct translations: if $t_g=\operatorname{id}_A$, then for any $U\in A$ and $u\in U$ we have $g(u)=(\operatorname{id}_V+g)(u)-u\in U\cap W=\{0\}$, so $g$ vanishes on both $U$ and $W$, and hence on $V$. The map $g\mapsto t_g$ is therefore a group isomorphism from the vector space of linear maps $V\to W$ vanishing on $W$ to $\mathcal{T}$, and defining $\lambda t_g:=t_{\lambda g}$ gives a compatible scalar multiplication, each axiom following from the corresponding axiom for these maps.
-
-For $V=\mathbb{R}^2$ and $W$ the $x$-axis, the complements of $W$ are the lines $U_a:=\operatorname{span}\{(a,1)\}$ through the origin other than $W$, and the maps vanishing on $W$ are $g_c(x,y)=(cy,0)$. The shear $(x,y)\mapsto(x+cy,y)$ sends $(a,1)$ to $(a+c,1)$, so
-$$
-t_{g_c}(U_a)=U_{a+c},\qquad \lambda t_{g_c}=t_{g_{\lambda c}}.
-$$
-
-![[affine-spaces-complements.svg|center|506]]
-
-In particular the vertical line $U_0$, which looks special only because of the coordinates, is moved like every other complement.
-
-#### Example 6: Different Scalars on the Same Torsor
+#### Example 5: Different Scalars on the Same Torsor
 
 Letting $\mathcal{T}:=\{\tau_v:v\in\mathbb{C}\}$ be the set of translations $\tau_v(z)=z+v$ defined by letting $\mathbb{C}$ act on itself through addition, we may define the map $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ to be the ring homomorphism corresponding to the scalar multiplication $\lambda\tau_v:=\tau_{\lambda v}.$  Composing $\rho$ with the field automorphism 
 
@@ -736,10 +708,10 @@ Let $\mathcal{T}$ be the translations of the canonical affine space of $\mathbb{
 1. Show that every compatible scalar multiplication $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ agreeing with the real one on $\mathbb{R}$ satisfies $\rho(a+bi)=a\operatorname{id}_{\mathcal{T}}+b\,\rho(i)$, and that conversely, for every complex structure $J$ on $\mathcal{T}$, the formula $\rho(a+bi):=a\operatorname{id}_{\mathcal{T}}+bJ$ defines such a scalar multiplication.
 2. Show that a linear map $J\in\operatorname{End}(\mathbb{R}^2)$ satisfies $J^2=-\operatorname{id}$ if and only if $\operatorname{tr}J=0$ and $\det J=1$.
 3. Deduce that the complex structures on $\mathbb{R}^2$ are the maps $J(x,y)=(ax+by,\ cx-ay)$ with $a,b,c\in\mathbb{R}$ and $a^2+bc=-1$.
-4. Show that exactly two of these are rotations, namely the quarter turns $\pm J$ of Example 6.
+4. Show that exactly two of these are rotations, namely the quarter turns $\pm J$ of Example 5.
 
 > [!hint]- Hint
-> For the first claim in 1, follow Example 6; for the converse, expand $(a+bJ)(c+dJ)$. For 2, the Cayley–Hamilton theorem gives $J^2-(\operatorname{tr}J)J+(\det J)\operatorname{id}=0$ for every $J\in\operatorname{End}(\mathbb{R}^2)$.
+> For the first claim in 1, follow Example 5; for the converse, expand $(a+bJ)(c+dJ)$. For 2, the Cayley–Hamilton theorem gives $J^2-(\operatorname{tr}J)J+(\det J)\operatorname{id}=0$ for every $J\in\operatorname{End}(\mathbb{R}^2)$.
 
 #### Problem 12: Relativistic Velocity Addition $\star$
 
@@ -780,14 +752,35 @@ $\vec{A}\times\{0\}$. Fixing $o\in A$, let $\phi_o:A\to\vec{A};\ p\mapsto p-o$ b
 > [!hint]- Hint
 > For 2, every vector of $V$ is the sum of a vector in $\vec{A}\times\{0\}$ and a multiple of $(0,1)=\psi_o(o)$, and Chasles' identity gives $(p-o)+(o-o')=p-o'$.
 
-#### Problem 14: Complements as Graphs $\star$
+#### Problem 14: Lines Through the Origin $\star$
 
-Let $V$, $W$ and $A$ be as in Example 5, and fix $U\in A$. Write $\pi_U:V\to U$ for the projection along $W$, sending each $v=w+u$ with $w\in W$ and $u\in U$ to $u$.
+For $a\in\mathbb{R}$, write $U_a:=\operatorname{span}\{(a,1)\}$, and let $\mathcal{U}:=\{U_a:a\in\mathbb{R}\}$. For $c\in\mathbb{R}$, let $s_c:\mathbb{R}^2\to\mathbb{R}^2;\ (x,y)\mapsto(x+cy,\ y)$.
 
-1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
-2. Show that the translation taking $U$ to the graph of $f$ is $t_g$ with $g=f\circ\pi_U$.
-3. Deduce that the induced vector space structure on $A$ with origin $U$ is given by $\operatorname{graph}f+_U\operatorname{graph}f'=\operatorname{graph}(f+f')$ and $\lambda\cdot_U\operatorname{graph}f=\operatorname{graph}(\lambda f)$.
-4. For $V=\mathbb{R}^2$, $W$ the $x$-axis and $U_a=\operatorname{span}\{(a,1)\}$, show that $U_a+_{U_0}U_b=U_{a+b}$, and that $U_a+_{U_d}U_b=U_{a+b-d}$ for every $d\in\mathbb{R}$.
+1. Show that $\mathcal{U}$ is the set of lines through the origin in $\mathbb{R}^2$ other than the $x$-axis, that $U_a=U_b$ only if $a=b$, and that $s_c$ carries $U_a$ onto $U_{a+c}$.
+2. Deduce that the maps $t_c:\mathcal{U}\to\mathcal{U};\ U\mapsto s_c(U)$ form an Abelian subgroup of $\operatorname{Sym}(\mathcal{U})$ acting transitively on $\mathcal{U}$, and that $\lambda t_c:=t_{\lambda c}$ makes $\mathcal{U}$ an affine space.
+
+More generally, let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a subspace. A _complement_ of $W$ is a subspace $U\subseteq V$ with $V=W\oplus U$; let $A$ be the set of complements of $W$, and assume it is nonempty. Let
+$$
+\mathcal{S}_W:=\{g\in\operatorname{End}(V):g(V)\subseteq W,\ g(W)=0\},
+$$
+and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are the maps $s_c$.
+
+3. Show that $\mathcal{S}_W$ is a vector subspace of $\operatorname{End}(V)$, and that $g\circ h=0$ for all $g,h\in\mathcal{S}_W$.
+4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map $t_g:A\to A;\ U\mapsto(\operatorname{id}_V+g)(U)$.
+5. Show that $t_g\circ t_h=t_{g+h}$, and that $t_g=\operatorname{id}_A$ only if $g=0$.
+6. Show that $\mathcal{T}:=\{t_g:g\in\mathcal{S}_W\}$ acts transitively on $A$, and deduce that $\lambda t_g:=t_{\lambda g}$ makes $(A,\mathcal{T},\cdot)$ the intrinsic data of an affine space.
 
 > [!hint]- Hint
-> For 1, decompose each $u\in U$ along $V=W\oplus U'$. For 2, check that $\operatorname{id}_V+f\circ\pi_U$ fixes $W$ and sends each $u\in U$ to $u+f(u)$. For 4, write $U_a$ as a graph over $U_d$.
+> For 1, consider where each line meets the line $y=1$. For 3, the image of $h$ lies in $W$, where $g$ vanishes. For 4, compute $(\operatorname{id}_V+g)\circ(\operatorname{id}_V-g)$, and apply the shear to $V=W\oplus U$. For 5, if $t_g=\operatorname{id}_A$, show that $g(u)\in U\cap W$ for every $u$ in a complement $U$. For 6, given $U$ and $U'$, write each $u\in U$ as $u=w+u'$ with $w\in W$ and $u'\in U'$, and set $g(u):=-w$.
+
+#### Problem 15: Complements as Graphs $\star$
+
+Let $V$, $W$, $A$, $\mathcal{S}_W$ and the maps $t_g$ be as in Problem 14. Fix $U\in A$, and write $\pi_U:V\to U$ for the projection along $W$, sending each $v=w+u$ with $w\in W$ and $u\in U$ to $u$.
+
+1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
+2. Show that $f\circ\pi_U\in\mathcal{S}_W$, and that $t_{f\circ\pi_U}(U)$ is the graph of $f$.
+3. Deduce that the induced vector space structure on $A$ with origin $U$ is given by $\operatorname{graph}f+_U\operatorname{graph}f'=\operatorname{graph}(f+f')$ and $\lambda\cdot_U\operatorname{graph}f=\operatorname{graph}(\lambda f)$.
+4. For $V=\mathbb{R}^2$, $W$ the $x$-axis and $U_a$ as in Problem 14, show that $U_a+_{U_0}U_b=U_{a+b}$, and that $U_a+_{U_d}U_b=U_{a+b-d}$ for every $d\in\mathbb{R}$.
+
+> [!hint]- Hint
+> For 1, decompose each $u\in U$ along $V=W\oplus U'$. For 2, check that $\operatorname{id}_V+f\circ\pi_U$ sends each $u\in U$ to $u+f(u)$. For 4, write $U_a$ as a graph over $U_d$.
