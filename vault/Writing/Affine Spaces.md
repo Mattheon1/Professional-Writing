@@ -764,8 +764,7 @@ p&\mapsto p-o, & p&\mapsto\bigl(\phi_o(p),1\bigr).
 $$
 
 1. Show that $\psi_o$ is a bijection with $\psi_o(p+v)=\psi_o(p)+(v,0)$ and $\psi_o(q)-\psi_o(p)=(q-p,0)$ for all $p,q\in A$ and $v\in\vec{A}$.
-2. Let $o'\in A$ be a second origin. Show that there is exactly one linear map $S:V\to V$ with
-3. $S\circ\psi_o=\psi_{o'}$ and $S(v,0)=(v,0)$ for every $v\in\vec{A}$, and that $S(v,\lambda)=\bigl(v+\lambda(o-o'),\lambda\bigr)$.
+2. Let $o'\in A$ be a second origin. Show that there is exactly one linear map $S:V\to V$ with $S\circ\psi_o=\psi_{o'}$ and $S(v,0)=(v,0)$ for every $v\in\vec{A}$, and that $S(v,\lambda)=\bigl(v+\lambda(o-o'),\lambda\bigr)$.
 4. Show that $S(v,1)=\bigl((\phi_{o'}\circ\phi_o^{-1})(v),1\bigr)$ for every $v\in\vec{A}$.
 
 > [!hint]- Hint
