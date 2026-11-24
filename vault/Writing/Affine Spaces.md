@@ -432,7 +432,7 @@ Under $\phi_o$, the addition of a displacement vector becomes vector addition, a
 $$
 \phi_o(p+v)=\bigl((p+v)-p\bigr)+(p-o)=\phi_o(p)+v,\qquad \phi_o(q)-\phi_o(p)=(q-o)-(p-o)=q-p.
 $$
-These are the operations of a vector space acting on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
+On the right, a vector space acts on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
 ![[affine-spaces-cd-canonical-model.svg|center|418]]
 commute, with the operations of $\mathcal{A}$ along the top and those of $\mathcal{A}_{\vec{A}}$ along the bottom. Choosing a base point $o\in A$ thus identifies $\mathcal{A}$ with $\mathcal{A}_{\vec{A}}$, which we call the _canonical model_ of $\mathcal{A}$.
 
