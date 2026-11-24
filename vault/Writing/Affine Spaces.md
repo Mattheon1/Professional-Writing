@@ -716,15 +716,22 @@ $k\in A$.
 
 #### Problem 11: Complex Structures on the Plane $\star$
 
-Let $\mathcal{T}$ be the translations of the canonical affine space of $\mathbb{R}^2$, with the real scalar multiplication $\lambda\tau_v:=\tau_{\lambda v}$, and identify $\mathcal{T}$ with $\mathbb{R}^2$ through the linear isomorphism $v\mapsto\tau_v$.
+Let $\mathcal{T}$ be the translations of the canonical affine space of $\mathbb{R}^2$, with the real scalar multiplication $\lambda\tau_v:=\tau_{\lambda v}$, and identify $\mathcal{T}$ with $\mathbb{R}^2$ through the linear isomorphism $v\mapsto\tau_v$. Under this identification, the complex structure $J$ of Example 5 is
+$$
+\begin{aligned}
+J_0:\mathbb{R}^2&\to\mathbb{R}^2; \\
+(x,y)&\mapsto(-y,\ x).
+\end{aligned}
+$$
 
-1. Show that every compatible scalar multiplication $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ agreeing with the real one on $\mathbb{R}$ satisfies $\rho(a+bi)=a\operatorname{id}_{\mathcal{T}}+b\,\rho(i)$, and that conversely, for every complex structure $J$ on $\mathcal{T}$, the formula $\rho(a+bi):=a\operatorname{id}_{\mathcal{T}}+bJ$ defines such a scalar multiplication.
+1. Show that every compatible scalar multiplication $\rho:\mathbb{C}\to\operatorname{End}(\mathcal{T})$ extending the real one satisfies $\rho(a+bi)=a\operatorname{id}_{\mathcal{T}}+b\,\rho(i)$, and that conversely, for every complex structure $J$ on $\mathcal{T}$, the formula $\rho(a+bi):=a\operatorname{id}_{\mathcal{T}}+bJ$ defines such a scalar multiplication.
 2. Show that a linear map $J\in\operatorname{End}(\mathbb{R}^2)$ satisfies $J^2=-\operatorname{id}$ if and only if $\operatorname{tr}J=0$ and $\det J=1$.
-3. Deduce that the complex structures on $\mathbb{R}^2$ are the maps $J(x,y)=(ax+by,\ cx-ay)$ with $a,b,c\in\mathbb{R}$ and $a^2+bc=-1$.
-4. Show that exactly two of these are rotations, namely the quarter turns $\pm J$ of Example 5.
+3. Deduce that the compatible scalar multiplications by $\mathbb{C}$ extending the real one correspond to the maps $J(x,y)=(ax+by,\ cx-ay)$ with $a,b,c\in\mathbb{R}$ and $a^2+bc=-1$.
+4. For a complex structure $J$ and $\theta\in\mathbb{R}$, write $e^{\theta J}:=\cos\theta\operatorname{id}_{\mathcal{T}}+\sin\theta\,J$. Show that $e^{\theta J}\circ e^{\varphi J}=e^{(\theta+\varphi)J}$ and $\det e^{\theta J}=1$, and that the scalar multiplication given by $J$ satisfies $\rho(re^{i\theta})=r\,e^{\theta J}$ for all $r\geq0$ and $\theta\in\mathbb{R}$.
+5. Show that every complex structure on $\mathbb{R}^2$ is given by $h\circ J_0\circ h^{-1}$ for some linear isomorphism $h$ of $\mathbb{R}^2$. Deduce that every compatible scalar multiplication $\rho$ by $\mathbb{C}$ extending the real one satisfies $\rho(\lambda)=h\circ\rho_0(\lambda)\circ h^{-1}$ for all $\lambda\in\mathbb{C}$, where $\rho_0$ is the scalar multiplication of Example 5.
 
 > [!hint]- Hint
-> For the first claim in 1, follow Example 5; for the converse, expand $(a+bJ)(c+dJ)$. For 2, the Cayley–Hamilton theorem gives $J^2-(\operatorname{tr}J)J+(\det J)\operatorname{id}=0$ for every $J\in\operatorname{End}(\mathbb{R}^2)$.
+> For the first claim in 1, follow Example 5; for the converse, expand $(a+bJ)(c+dJ)$. For 2, the Cayley–Hamilton theorem gives $J^2-(\operatorname{tr}J)J+(\det J)\operatorname{id}=0$ for every $J\in\operatorname{End}(\mathbb{R}^2)$. For 4, use $J^2=-\operatorname{id}$ and the angle addition formulas; for the determinant, expand $\det(\cos\theta\operatorname{id}+\sin\theta\,J)$ using part 2. For 5, pick $v\neq0$; then $(v,Jv)$ is a basis, and $h$ can be chosen with $h(e_1)=v$ and $h(e_2)=Jv$.
 
 #### Problem 12: Relativistic Velocity Addition $\star$
 
