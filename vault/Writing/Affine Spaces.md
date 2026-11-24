@@ -234,7 +234,7 @@ Hence $\tau$ is a linear isomorphism between the space of displacements and the 
 The definition above describes affine spaces with respect to a predetermined action by an external space of displacements, with the geometry of the resultant affine space fully specified by this choice. We may instead describe this geometry intrinsically, by specifying which permutations of the point set constitute translations, and how scalars act on them.
 #### A Torsor of Translations
 
-To begin, let $A$ be any nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ be an Abelian subgroup whose right action by evaluation
+To begin, let $A$ be any nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ be an Abelian subgroup whose right action by evaluation[^2]
 $$
 \begin{aligned}
 \operatorname{ev}:A\times\mathcal{T}&\to A; \\
@@ -247,7 +247,7 @@ t(s(p))=s(t(p))=s(p).
 $$
 Since the action is transitive, $s(p)$ ranges over all of $A$. Hence $t$ fixes every point, and as an element of $\operatorname{Sym}(A)$ it must be $\operatorname{id}_A$, so the action is free.
 
-A set equipped with such a free and transitive action is called a _torsor_ under the acting group. Writing the group operations and action additively as
+A set equipped with such a free and transitive action is called a _torsor_[^3] under the acting group. Writing the group operations and action additively as
 $$
 t+s:=t\circ s,\qquad 0:=\operatorname{id}_A,\qquad -t:=t^{-1},\qquad p+t:=t(p),
 $$
@@ -299,12 +299,10 @@ where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the unde
 $$
 (\alpha+\beta)(t):=\alpha(t)\circ\beta(t),\qquad (\alpha\beta)(t):=\alpha(\beta(t)).
 $$
-Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$, with scalar multiplication defined by
+Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$,[^4] with scalar multiplication defined by
 $$
 \lambda t:=\rho(\lambda)(t).
 $$
-Comparing with the four axioms above, $\rho(\lambda)$ preserving addition is distributivity over translations, while $\rho$ preserving products, identities, and sums are the remaining three axioms.
-
 The two descriptions carry the same data. Starting from an affine space 
 $\mathcal{A}=(A,\vec{A},+)$, the linear isomorphism $\tau:\vec{A}\to\mathcal{T}(\mathcal{A})$ satisfies $\tau_v(p)=p+v$, meaning that the [[Notation#Diagrams|diagram]]
 ![[affine-spaces-cd-action-evaluation.svg|center|244]]
@@ -462,7 +460,7 @@ Scalar multiplication on the other hand corresponds to translating $p$ along the
 $$
 \lambda\cdot_o p=o+\lambda(p-o)=p+(1-\lambda)(o-p),
 $$
-where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$, which gives $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$.[^5]
 
 ![[affine-spaces-induced-operations.svg|center|678]]
 
@@ -889,3 +887,13 @@ Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with compone
 
 > [!hint]- Hint
 > For 2, substitute $t=\varepsilon$ into $f(p+tv)$; every power $t^k$ with $k\geq2$ becomes $0$. For 3 and 4, use $2=0$ in $\mathbb{F}_2$. For 5, compute $\omega^4=(1+\omega)^2$.
+
+[^1]: $\star$ Apart from Example 3, nothing in this article requires $\mathbb{F}$ to be a field: replacing $\mathbb{F}$ by a ring $R$ and $\vec{A}$ by a left $R$-module, every construction and argument goes through unchanged. Fields (or division rings) become necessary once bases and dimension enter the series.
+
+[^2]: $\star$ For a general subgroup of $\operatorname{Sym}(A)$, evaluation is a left action, as $(t\circ s)(p)=t(s(p))$ applies $s$ first. Since $\mathcal{T}$ is Abelian, the two orders agree, and writing the action on the right matches the notation $p+v$.
+
+[^3]: Torsors are also called _principal homogeneous spaces_.
+
+[^4]: Comparing with the four axioms above, $\rho(\lambda)$ preserving addition corresponds to distributivity over translations, while $\rho$ preserving products, identities, and sums corresponds to the remaining three axioms.
+
+[^5]: Explicitly, $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
