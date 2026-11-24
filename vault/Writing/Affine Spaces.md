@@ -289,17 +289,17 @@ $$
 \lambda(t+s)&=\lambda t+\lambda s, & (\lambda+\mu)t&=\lambda t+\mu t.
 \end{aligned}
 $$
-As these properties make $\mathcal{T}$ an $\mathbb{F}$-vector space, defining $(\vec{A},+):=(\mathcal{T},\operatorname{ev})$ gives a free and transitive group action by a vector space on $A$. We thus obtain our original description of an affine space as a triple $\mathcal{A}:=(A,\vec{A},+)$ from the intrinsic data $(A,\mathcal{T},\cdot)$.
+As these properties make $\mathcal{T}$ an $\mathbb{F}$-vector space, defining $(\vec{A},+):=(\mathcal{T},\operatorname{ev})$[^4] gives a free and transitive group action by a vector space on $A$. We thus obtain our original description of an affine space as a triple $\mathcal{A}:=(A,\vec{A},+)$ from the intrinsic data $(A,\mathcal{T},\cdot)$.
 
 While in most applications the appropriate scalar multiplication is already supplied by the ambient algebraic structure on the point set, in general any such operation can be specified equivalently by a ring homomorphism
 $$
 \rho:\mathbb{F}\to\operatorname{End}(\mathcal{T}),
 $$
-where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the underlying Abelian group. Here addition is defined pointwise and multiplication by composition, so that for arbitrary $\alpha,\beta\in\operatorname{End}(\mathcal{T})$,
+where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the underlying Abelian group. Here addition is defined pointwise[^5] and multiplication by composition, so that for arbitrary $\alpha,\beta\in\operatorname{End}(\mathcal{T})$,
 $$
 (\alpha+\beta)(t):=\alpha(t)\circ\beta(t),\qquad (\alpha\beta)(t):=\alpha(\beta(t)).
 $$
-Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$,[^4] with scalar multiplication defined by
+Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$,[^6] with scalar multiplication defined by
 $$
 \lambda t:=\rho(\lambda)(t).
 $$
@@ -460,7 +460,7 @@ Scalar multiplication on the other hand corresponds to translating $p$ along the
 $$
 \lambda\cdot_o p=o+\lambda(p-o)=p+(1-\lambda)(o-p),
 $$
-where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$.[^5]
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$.[^7]
 
 ![[affine-spaces-induced-operations.svg|center|678]]
 
@@ -485,7 +485,7 @@ v&\mapsto(o+v)-o'=v+(o-o'),
 $$
 where the second equality follows from [[#Chasles' Identity and Some Corollaries|Chasles' identity]]. This map translates the canonical model by the nonzero vector $o-o'$, and so moves the zero vector and is not linear. As the square
 ![[affine-spaces-cd-origins-points.svg|center|184]]
-commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.
+commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.[^8]
 
 Reading position vectors instead as displacements, $\phi_o$ and $\phi_{o'}$ identify both $\vec{A}_o$ and $\vec{A}_{o'}$ with the space of displacements $\vec{A}$, and comparing the two through it takes each point of $\vec{A}_o$ to the point of $\vec{A}_{o'}$ with the same label. This comparison is given by the composite map
 $$
@@ -826,7 +826,7 @@ w+u&\mapsto u
 $$
 be the projection along $W$, where $w\in W$ and $u\in U$.
 
-1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
+1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$[^9] of exactly one linear map $f:U\to W$.
 2. Show that $f\circ\pi_U\in\mathcal{S}_W$, and that $t_{f\circ\pi_U}(U)$ is the graph of $f$.
 3. Deduce that the induced vector space structure on $A$ with origin $U$ is given by $\operatorname{graph}f+_U\operatorname{graph}f'=\operatorname{graph}(f+f')$ and $\lambda\cdot_U\operatorname{graph}f=\operatorname{graph}(\lambda f)$.
 4. For $V=\mathbb{R}^2$, $W$ the $x$-axis and $U_a$ as in Problem 14, show that $U_a+_{U_0}U_b=U_{a+b}$, and that $U_a+_{U_d}U_b=U_{a+b-d}$ for every $d\in\mathbb{R}$.
@@ -894,6 +894,14 @@ Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with compone
 
 [^3]: Torsors are also called _principal homogeneous spaces_.
 
-[^4]: Comparing with the four axioms above, $\rho(\lambda)$ preserving addition corresponds to distributivity over translations, while $\rho$ preserving products, identities, and sums corresponds to the remaining three axioms.
+[^4]: On the left, $+$ names the action $A\times\vec{A}\to A$ from the opening rather than addition in $\vec{A}$, so this sets $\vec{A}:=\mathcal{T}$ and takes the action to be evaluation.
 
-[^5]: Explicitly, $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+[^5]: The sum is written with $\circ$ because the group operation of $\mathcal{T}$ is composition; in the additive notation of the previous subsection, it reads $(\alpha+\beta)(t)=\alpha(t)+\beta(t)$.
+
+[^6]: Comparing with the four axioms above, $\rho(\lambda)$ preserving addition corresponds to distributivity over translations, while $\rho$ preserving products, identities, and sums corresponds to the remaining three axioms.
+
+[^7]: Explicitly, $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+
+[^8]: The domain and codomain are written as $\vec{A}_o$ and $\vec{A}_{o'}$ rather than $A$ to record that this is a map between two different vector spaces on the same point set.
+
+[^9]: Formally, an element of the direct sum $W\oplus U$ is a pair with one component in each summand, and $w+u$ is convenient notation for the pair with components $w$ and $u$. In this notation, the graph $\{(u,f(u)):u\in U\}$ of $f$ is written $\{u+f(u):u\in U\}$, and $\pi_U$ sends $w+u$ to $u$.
