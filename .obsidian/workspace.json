@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "vault/Writing/Affine coordinates and convexity/Affine and Barycentric Coordinates.md",
+                "file": "vault/Writing/Affine Spaces.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Affine and Barycentric Coordinates"
+              "title": "Affine Spaces"
             }
           }
         ],
@@ -206,6 +206,7 @@
   },
   "active": "280f46dc97d0fdf2",
   "lastOpenFiles": [
+    "vault/Writing/Affine coordinates and convexity/Affine and Barycentric Coordinates.md",
     "vault/Writing/Affine coordinates and convexity/Affine Basis.md",
     "vault/Writing/Affine coordinates and convexity/Affine Combinations.md",
     "vault/Writing/Affine coordinates and convexity/Affine Hull.md",
@@ -221,7 +222,6 @@
     "vault/Home.md",
     "vault/Projects.md",
     "conflict-files-obsidian-git.md",
-    "vault/Writing/Affine coordinates and convexity/Affine and Barycentric Coordinates.md",
     "vault/Attachments/notation-cd-square-triangle.svg",
     "vault/Attachments/notation-cd-pasting.svg",
     "vault/Attachments/affine-spaces-translation.svg",
