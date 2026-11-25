@@ -3,7 +3,7 @@ publish: true
 title: Affine Spaces
 slug: affine-spaces
 subject: Affine geometry
-status: First Draft
+status: Complete
 description: Translations, subtraction, and the vector-space structure obtained by choosing an origin.
 order: 40
 ---
@@ -66,14 +66,14 @@ $$\begin{aligned}
 g&\mapsto g'  
 \end{aligned}$$
 
-is a linear map whose kernel, by the mean value theorem, consists precisely of the constant functions on $I$. Given a continuous function $f\in C^0(I)$, the solution set of the equation $g'=f$ is then the set of anti-derivatives $$\int f(s)\,ds:=\{ g\in C^1(I):g'=f \},$$ which is nonempty by the fundamental theorem of calculus: for any $a\in I$, the function
+is a linear map whose kernel, by the mean value theorem, consists precisely of the constant functions on $I$. Given a continuous function $f\in C^0(I)$, the solution set of the equation $g'=f$ is then the set of antiderivatives $$\int f(s)\,ds:=\{ g\in C^1(I):g'=f \},$$ which is nonempty by the fundamental theorem of calculus: for any $a\in I$, the function
 
 $$G_a(t):=\int_a^t f(s)\,ds$$
 
-satisfies $G_a'=f$, and is thus a solution. Choosing a different base point $b\in I$ gives a different choice of anti-derivative $G_{b}$, whose displacement from $G_{a}$ is given by the constant function
+satisfies $G_a'=f$, and is thus a solution. Choosing a different base point $b\in I$ gives a different choice of antiderivative $G_{b}$, whose displacement from $G_{a}$ is given by the constant function
 
 $$G_{b}-G_a=\int_{b}^{a}f(s)\,ds.$$
-Thus the set of anti-derivatives of $f$ forms an affine space over the constant functions on $I$, with translation corresponding to the identity $$\int_{a}^cf(s)\,ds=\int_{b}^cf(s)\,ds+\int_{a}^{b}f(s)\,ds.$$ 
+Thus the set of antiderivatives of $f$ forms an affine space over the constant functions on $I$, with translation corresponding to the identity $$\int_{a}^cf(s)\,ds=\int_{b}^cf(s)\,ds+\int_{a}^{b}f(s)\,ds.$$ 
 
 ![[affine-spaces-antiderivatives.svg|center|428]]
 
@@ -234,7 +234,7 @@ Hence $\tau$ is a linear isomorphism between the space of displacements and the 
 The definition above describes affine spaces with respect to a predetermined action by an external space of displacements, with the geometry of the resultant affine space fully specified by this choice. We may instead describe this geometry intrinsically, by specifying which permutations of the point set constitute translations, and how scalars act on them.
 #### A Torsor of Translations
 
-To begin, let $A$ be any nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ be an Abelian subgroup whose right action by evaluation
+To begin, let $A$ be any nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ be an Abelian subgroup whose right action by evaluation[^2]
 $$
 \begin{aligned}
 \operatorname{ev}:A\times\mathcal{T}&\to A; \\
@@ -247,7 +247,7 @@ t(s(p))=s(t(p))=s(p).
 $$
 Since the action is transitive, $s(p)$ ranges over all of $A$. Hence $t$ fixes every point, and as an element of $\operatorname{Sym}(A)$ it must be $\operatorname{id}_A$, so the action is free.
 
-A set equipped with such a free and transitive action is called a _torsor_ under the acting group. Writing the group operations and action additively as
+A set equipped with such a free and transitive action is called a _torsor_[^3] under the acting group. Writing the group operations and action additively as
 $$
 t+s:=t\circ s,\qquad 0:=\operatorname{id}_A,\qquad -t:=t^{-1},\qquad p+t:=t(p),
 $$
@@ -259,7 +259,7 @@ where the first identity follows from commutativity, as
 $$
 p+(t+s)=t(s(p))=s(t(p))=(p+t)+s.
 $$
-These are the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
+These match the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
 
 As the translation taking any point $p$ to any point $q$ is unique by the freedom of the action, we may once again denote it by $q-p$ and define the map
 $$
@@ -289,22 +289,20 @@ $$
 \lambda(t+s)&=\lambda t+\lambda s, & (\lambda+\mu)t&=\lambda t+\mu t.
 \end{aligned}
 $$
-As these properties make $\mathcal{T}$ an $\mathbb{F}$-vector space, defining $(\vec{A},+):=(\mathcal{T},\operatorname{ev})$ gives a free and transitive group action by a vector space on $A$. We thus obtain our original description of an affine space as a triple $\mathcal{A}:=(A,\vec{A},+)$ from the intrinsic data $(A,\mathcal{T},\cdot)$.
+As these properties make $\mathcal{T}$ an $\mathbb{F}$-vector space, defining $(\vec{A},+):=(\mathcal{T},\operatorname{ev})$[^4] gives a free and transitive group action by a vector space on $A$. We thus obtain our original description of an affine space as a triple $\mathcal{A}:=(A,\vec{A},+)$ from the intrinsic data $(A,\mathcal{T},\cdot)$.
 
 While in most applications the appropriate scalar multiplication is already supplied by the ambient algebraic structure on the point set, in general any such operation can be specified equivalently by a ring homomorphism
 $$
 \rho:\mathbb{F}\to\operatorname{End}(\mathcal{T}),
 $$
-where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the underlying Abelian group. Here addition is defined pointwise and multiplication by composition, so that for arbitrary $\alpha,\beta\in\operatorname{End}(\mathcal{T})$,
+where $\operatorname{End}(\mathcal{T})$ is the ring of endomorphisms of the underlying Abelian group. Here addition is defined pointwise[^5] and multiplication by composition, so that for arbitrary $\alpha,\beta\in\operatorname{End}(\mathcal{T})$,
 $$
 (\alpha+\beta)(t):=\alpha(t)\circ\beta(t),\qquad (\alpha\beta)(t):=\alpha(\beta(t)).
 $$
-Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$, with scalar multiplication defined by
+Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$,[^6] with scalar multiplication defined by
 $$
 \lambda t:=\rho(\lambda)(t).
 $$
-Comparing with the four axioms above, $\rho(\lambda)$ preserving addition is distributivity over translations, while $\rho$ preserving products, identities, and sums are the remaining three axioms.
-
 The two descriptions carry the same data. Starting from an affine space 
 $\mathcal{A}=(A,\vec{A},+)$, the linear isomorphism $\tau:\vec{A}\to\mathcal{T}(\mathcal{A})$ satisfies $\tau_v(p)=p+v$, meaning that the [[Notation#Diagrams|diagram]]
 ![[affine-spaces-cd-action-evaluation.svg|center|244]]
@@ -316,7 +314,7 @@ Every Abelian group admits a canonical scalar multiplication by integers given b
 $$
 nt:=\underbrace{t\circ\cdots\circ t}_{n},\qquad 0t:=\operatorname{id}_A,\qquad (-n)t:=-(nt),\qquad n>0.
 $$
-As $\mathcal{T}$ is Abelian, this multiplication satisfies the four axioms above with $\mathbb{Z}$ in place of $\mathbb{F}$, so every torsor is an affine space over $\mathbb{Z}$. Moreover, this is the only integer multiplication that may be defined, as a ring homomorphism $\mathbb{Z}\to\operatorname{End}(\mathcal{T})$ must send $1$ to $\operatorname{id}_{\mathcal{T}}$. Since $(\mathbb{Z},+)$ is generated by $1$, its value on every other integer is fixed by additivity.
+As $\mathcal{T}$ is Abelian, this multiplication satisfies the four axioms above with $\mathbb{Z}$ in place of $\mathbb{F}$, so every torsor is an affine space over $\mathbb{Z}$. This is also the only integer multiplication that may be defined, as a ring homomorphism $\mathbb{Z}\to\operatorname{End}(\mathcal{T})$ must send $1$ to $\operatorname{id}_{\mathcal{T}}$. Since $(\mathbb{Z},+)$ is generated by $1$, its value on every other integer is fixed by additivity.
 
 Over a field, such a scalar multiplication need not exist. Letting $S^1\subseteq\mathbb{C}$ be the unit circle, its group of rotations $U(1)$ consists of the maps
 $$
@@ -432,7 +430,7 @@ Under $\phi_o$, the addition of a displacement vector becomes vector addition, a
 $$
 \phi_o(p+v)=\bigl((p+v)-p\bigr)+(p-o)=\phi_o(p)+v,\qquad \phi_o(q)-\phi_o(p)=(q-o)-(p-o)=q-p.
 $$
-These are the operations of a vector space acting on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
+On the right, a vector space acts on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
 ![[affine-spaces-cd-canonical-model.svg|center|418]]
 commute, with the operations of $\mathcal{A}$ along the top and those of $\mathcal{A}_{\vec{A}}$ along the bottom. Choosing a base point $o\in A$ thus identifies $\mathcal{A}$ with $\mathcal{A}_{\vec{A}}$, which we call the _canonical model_ of $\mathcal{A}$.
 
@@ -462,7 +460,7 @@ Scalar multiplication on the other hand corresponds to translating $p$ along the
 $$
 \lambda\cdot_o p=o+\lambda(p-o)=p+(1-\lambda)(o-p),
 $$
-where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$, which gives $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|translating the endpoints]] of the displacement $o-p$.[^7]
 
 ![[affine-spaces-induced-operations.svg|center|678]]
 
@@ -487,7 +485,7 @@ v&\mapsto(o+v)-o'=v+(o-o'),
 $$
 where the second equality follows from [[#Chasles' Identity and Some Corollaries|Chasles' identity]]. This map translates the canonical model by the nonzero vector $o-o'$, and so moves the zero vector and is not linear. As the square
 ![[affine-spaces-cd-origins-points.svg|center|184]]
-commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.
+commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.[^8]
 
 Reading position vectors instead as displacements, $\phi_o$ and $\phi_{o'}$ identify both $\vec{A}_o$ and $\vec{A}_{o'}$ with the space of displacements $\vec{A}$, and comparing the two through it takes each point of $\vec{A}_o$ to the point of $\vec{A}_{o'}$ with the same label. This comparison is given by the composite map
 $$
@@ -678,7 +676,7 @@ $$
 $$
 
 1. Show that $(A,\vec{B},+_h)$ is an affine space.
-2. Show that the affine structure on $\mathbb{R}$ given by the maps $t_a$ of Example 4 is the case 
+2. Show that the affine structure on $\mathbb{R}$ given by the maps $t_a$ of Example 4 arises as the case 
 	$A=B=\mathbb{R}$, $h(x)=x^3$, with $\mathcal{B}$ the canonical affine space of $\mathbb{R}$.
 
 As $\mathbb{R}^2$ and $\mathbb{R}$ have the same cardinality, there is a bijection $\mathbb{R}^2\to\mathbb{R}$.
@@ -689,13 +687,15 @@ As $\mathbb{R}^2$ and $\mathbb{R}$ have the same cardinality, there is a bijecti
 > [!hint]- Hint
 > For 4, restrict the bijection to the unit circle. It attains its maximum and minimum there at two distinct points, and by the intermediate value theorem each of the two arcs between these points is mapped onto the whole interval between the two values.
 
-#### Problem 9: Why the Translations Commute $\star$
+#### Problem 9: Commutativity and Free Actions $\star$
 
 1. Show that $\operatorname{Sym}(\{1,2,3\})$ acts transitively but not freely on $\{1,2,3\}$ by evaluation, and find a subgroup of $\operatorname{Sym}(\{1,2,3\})$ under which $\{1,2,3\}$ is a torsor.
-2. Let $A$ be a finite nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ an Abelian subgroup acting transitively. Show that $\lvert\mathcal{T}\rvert=\lvert A\rvert$.
+2. Let $A$ be a nonempty set and $\mathcal{T}\leq\operatorname{Sym}(A)$ an Abelian subgroup acting transitively. Show that every $f\in\operatorname{Sym}(A)$ commuting with every $t\in\mathcal{T}$ lies in $\mathcal{T}$, and deduce that no Abelian subgroup of $\operatorname{Sym}(A)$ strictly contains $\mathcal{T}$.
+3. Deduce that a bijection $f$ of the points of an affine space $(A,\vec{A},+)$ satisfying $f(p+v)=f(p)+v$ for all $p\in A$ and $v\in\vec{A}$ is a translation.
+4. Show that the bijections of $\{1,2,3,4\}$ mapping $\{1,2\}$ onto itself and $\{3,4\}$ onto itself form an Abelian subgroup of $\operatorname{Sym}(\{1,2,3,4\})$ that is not strictly contained in any Abelian subgroup, but does not act transitively.
 
 > [!hint]- Hint
-> For 2, fix $p\in A$ and show that $t\mapsto t(p)$ is a bijection $\mathcal{T}\to A$.
+> For 2, pick $s\in\mathcal{T}$ with $s(p)=f(p)$, and apply the argument showing that the action of $\mathcal{T}$ is free to $s^{-1}\circ f$. For 4, a bijection commuting with the swap of $1$ and $2$ maps the points that swap fixes to points it fixes.
 
 #### Problem 10: Torsors Over Prime Fields $\star$
 
@@ -772,7 +772,7 @@ $$
 
 1. Show that $\psi_o$ is a bijection with $\psi_o(p+v)=\psi_o(p)+(v,0)$ and $\psi_o(q)-\psi_o(p)=(q-p,0)$ for all $p,q\in A$ and $v\in\vec{A}$.
 2. Let $o'\in A$ be a second origin. Show that there is exactly one linear map $S:V\to V$ with $S\circ\psi_o=\psi_{o'}$ and $S(v,0)=(v,0)$ for every $v\in\vec{A}$, and that $S(v,\lambda)=\bigl(v+\lambda(o-o'),\lambda\bigr)$.
-4. Show that $S(v,1)=\bigl((\phi_{o'}\circ\phi_o^{-1})(v),1\bigr)$ for every $v\in\vec{A}$.
+3. Show that $S(v,1)=\bigl((\phi_{o'}\circ\phi_o^{-1})(v),1\bigr)$ for every $v\in\vec{A}$.
 
 > [!hint]- Hint
 > For 2, every vector of $V$ is the sum of a vector in $\vec{A}\times\{0\}$ and a multiple of $(0,1)=\psi_o(o)$, and Chasles' identity gives $(p-o)+(o-o')=p-o'$.
@@ -801,7 +801,7 @@ More generally, let $V$ be an $\mathbb{F}$-vector space and $W\subseteq V$ a sub
 $$
 \mathcal{S}_W:=\{g\in\operatorname{End}(V):g(V)\subseteq W,\ g(W)=0\},
 $$
-and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are the maps $s_c$.
+and call a map $\operatorname{id}_V+g$ with $g\in\mathcal{S}_W$ a _shear along $W$_. For $V=\mathbb{R}^2$ and $W$ the $x$-axis, $A=\mathcal{U}$, and the shears along $W$ are given by the maps $s_c$.
 
 3. Show that $\mathcal{S}_W$ is a vector subspace of $\operatorname{End}(V)$, and that $g\circ h=0$ for all $g,h\in\mathcal{S}_W$.
 4. Show that each shear fixes $W$ pointwise and is invertible, and deduce that it carries complements of $W$ to complements of $W$, so that each $g\in\mathcal{S}_W$ defines a map
@@ -828,7 +828,7 @@ w+u&\mapsto u
 $$
 be the projection along $W$, where $w\in W$ and $u\in U$.
 
-1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$ of exactly one linear map $f:U\to W$.
+1. Show that every $U'\in A$ is the graph $\{u+f(u):u\in U\}$[^9] of exactly one linear map $f:U\to W$.
 2. Show that $f\circ\pi_U\in\mathcal{S}_W$, and that $t_{f\circ\pi_U}(U)$ is the graph of $f$.
 3. Deduce that the induced vector space structure on $A$ with origin $U$ is given by $\operatorname{graph}f+_U\operatorname{graph}f'=\operatorname{graph}(f+f')$ and $\lambda\cdot_U\operatorname{graph}f=\operatorname{graph}(\lambda f)$.
 4. For $V=\mathbb{R}^2$, $W$ the $x$-axis and $U_a$ as in Problem 14, show that $U_a+_{U_0}U_b=U_{a+b}$, and that $U_a+_{U_d}U_b=U_{a+b-d}$ for every $d\in\mathbb{R}$.
@@ -879,9 +879,9 @@ For a polynomial $g$ of degree $2$ in $x$ and $y$, the _directions at infinity_ 
 
 #### Problem 17: Infinitesimal Points $\star\star$
 
-Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with componentwise addition and multiplication $(a+b\varepsilon)(c+d\varepsilon):=ac+(ad+bc)\varepsilon$, so that $\varepsilon^2=0$. For a polynomial $f$ in $n$ variables over $\mathbb{F}$ and $p,v\in\mathbb{F}^n$, the expression $f(p+tv)$ is a polynomial in $t$, and we write $D_vf(p)$ for its coefficient of $t$. Over $\mathbb{R}$, $D_vf(p)$ is the derivative of $f$ at $p$ in the direction $v$.
+Let $\mathbb{F}[\varepsilon]:=\mathbb{F}[x]/(x^2)$ be the quotient of the polynomial ring $\mathbb{F}[x]$ by the ideal generated by $x^2$, where $\varepsilon:=[x]$, so that $\varepsilon^2=0$. For a polynomial $f$ in $n$ variables over $\mathbb{F}$ and $p,v\in\mathbb{F}^n$, the expression $f(p+tv)$ is a polynomial in $t$, and we write $D_vf(p)$ for its coefficient of $t$. Over $\mathbb{R}$, $D_vf(p)$ is the derivative of $f$ at $p$ in the direction $v$.
 
-1. Show that $\mathbb{F}[\varepsilon]$ is a commutative ring, and that every element of $\mathbb{F}[\varepsilon]^n$ can be written uniquely as $p+\varepsilon v$ with $p,v\in\mathbb{F}^n$.
+1. Show that every element of $\mathbb{F}[\varepsilon]$ can be written uniquely as $a+b\varepsilon$ with $a,b\in\mathbb{F}$, so that $\mathbb{F}[\varepsilon]$ and $\mathbb{F}[x]_{\leq1}$ have the same underlying vector space, and that $(a+b\varepsilon)(c+d\varepsilon)=ac+(ad+bc)\varepsilon$. Deduce that every element of $\mathbb{F}[\varepsilon]^n$ can be written uniquely as $p+\varepsilon v$ with $p,v\in\mathbb{F}^n$.
 2. Show that $f(p+\varepsilon v)=f(p)+\varepsilon\,D_vf(p)$, and that $D_vf(p)=f(p+v)-f(p)$ when $f$ has degree at most $1$.
 3. Over $\mathbb{F}_2$, show that $x^2+x$ vanishes at $0$ and $1$, but takes the value $\varepsilon$ at both $\varepsilon$ and $1+\varepsilon$.
 4. Show that $x^4+x^2$ vanishes at every element of $\mathbb{F}_2[\varepsilon]$.
@@ -889,3 +889,27 @@ Let $\mathbb{F}[\varepsilon]:=\{a+b\varepsilon:a,b\in\mathbb{F}\}$, with compone
 
 > [!hint]- Hint
 > For 2, substitute $t=\varepsilon$ into $f(p+tv)$; every power $t^k$ with $k\geq2$ becomes $0$. For 3 and 4, use $2=0$ in $\mathbb{F}_2$. For 5, compute $\omega^4=(1+\omega)^2$.
+
+---
+## References
+
+- Walter Noll, _Finite-Dimensional Spaces: Algebra, Geometry, and Analysis_, Vol. I, Martinus Nijhoff, 1987, Chapter 3. A corrected reprint is [freely available](https://kilthub.cmu.edu/articles/journal_contribution/Finite-Dimensional_Spaces_Algebra_Geometry_and_Analysis_Volume_I/6477443) from Carnegie Mellon University.
+- A. I. Kostrikin and Yu. I. Manin, _Linear Algebra and Geometry_, translated by M. E. Alferieff, Gordon and Breach, 1989, Chapter 3, §1.
+
+[^1]: $\star$ Apart from Example 3, nothing in this article requires $\mathbb{F}$ to be a field: replacing $\mathbb{F}$ by a ring $R$ and $\vec{A}$ by a left $R$-module, every construction and argument goes through unchanged. Fields (or division rings) become necessary once bases and dimension enter the series.
+
+[^2]: $\star$ For a general subgroup of $\operatorname{Sym}(A)$, evaluation is a left action, as $(t\circ s)(p)=t(s(p))$ applies $s$ first. Since $\mathcal{T}$ is Abelian, the two orders agree, and writing the action on the right matches the notation $p+v$.
+
+[^3]: Torsors are also called _principal homogeneous spaces_.
+
+[^4]: On the left, $+$ names the action $A\times\vec{A}\to A$ from the opening rather than addition in $\vec{A}$, so this sets $\vec{A}:=\mathcal{T}$ and takes the action to be evaluation.
+
+[^5]: The sum is written with $\circ$ because the group operation of $\mathcal{T}$ is composition; in the additive notation of the previous subsection, it reads $(\alpha+\beta)(t)=\alpha(t)+\beta(t)$.
+
+[^6]: Comparing with the four axioms above, $\rho(\lambda)$ preserving addition corresponds to distributivity over translations, while $\rho$ preserving products, identities, and sums corresponds to the remaining three axioms.
+
+[^7]: Explicitly, $\bigl(o+\lambda(p-o)\bigr)-p=(o-p)+\lambda(p-o)=(1-\lambda)(o-p)$.
+
+[^8]: The domain and codomain are written as $\vec{A}_o$ and $\vec{A}_{o'}$ rather than $A$ to record that this is a map between two different vector spaces on the same point set.
+
+[^9]: Formally, an element of the direct sum $W\oplus U$ is a pair with one component in each summand, and $w+u$ is convenient notation for the pair with components $w$ and $u$. In this notation, the graph $\{(u,f(u)):u\in U\}$ of $f$ is written $\{u+f(u):u\in U\}$, and $\pi_U$ sends $w+u$ to $u$.
