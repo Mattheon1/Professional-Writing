@@ -222,9 +222,14 @@ Transferring the scalar multiplication on $\vec{A}$ through $\tau$ by defining
 $$
 \lambda\tau_v:=\tau_{\lambda v},
 $$
-each vector space axiom on $\mathcal{T}(\mathcal{A})$ follows from the corresponding axiom on $\vec{A}$, such as
+the scalar multiplication axioms on $\mathcal{T}(\mathcal{A})$ follow from the corresponding axioms on $\vec{A}$:
 $$
-\lambda(\tau_u\circ\tau_v)=\lambda\tau_{u+v}=\tau_{\lambda u+\lambda v}=(\lambda\tau_u)\circ(\lambda\tau_v).
+\begin{aligned}
+\lambda(\mu\tau_v)&=\lambda\tau_{\mu v}=\tau_{(\lambda\mu)v}=(\lambda\mu)\tau_v, \\
+1\tau_v&=\tau_{1v}=\tau_v, \\
+\lambda(\tau_u\circ\tau_v)&=\lambda\tau_{u+v}=\tau_{\lambda u+\lambda v}=(\lambda\tau_u)\circ(\lambda\tau_v), \\
+(\lambda+\mu)\tau_v&=\tau_{\lambda v+\mu v}=(\lambda\tau_v)\circ(\mu\tau_v).
+\end{aligned}
 $$
 Hence $\tau$ is a linear isomorphism between the space of displacements and the space of translations. 
 
@@ -255,11 +260,7 @@ for arbitrary points $p,q\in A$ and translations $t,s\in\mathcal{T}$ we have
 $$
 p+(t+s)=(p+t)+s,\qquad \exists!u\in\mathcal{T}:p+u=q,
 $$
-where the first identity follows from commutativity, as
-$$
-p+(t+s)=t(s(p))=s(t(p))=(p+t)+s.
-$$
-These match the additive conditions we placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
+These match the additive conditions placed on affine spaces in [[#The External Displacement Model of an Affine Space|the opening]], with no reference made to scalars.
 
 As the translation taking any point $p$ to any point $q$ is unique by the freedom of the action, we may once again denote it by $q-p$ and define the map
 $$
@@ -303,10 +304,8 @@ Each scalar $\lambda$ then determines an endomorphism $\rho(\lambda)$,[^6] with 
 $$
 \lambda t:=\rho(\lambda)(t).
 $$
-The two descriptions carry the same data. Starting from an affine space 
-$\mathcal{A}=(A,\vec{A},+)$, the linear isomorphism $\tau:\vec{A}\to\mathcal{T}(\mathcal{A})$ satisfies $\tau_v(p)=p+v$, meaning that the [[Notation#Diagrams|diagram]]
-![[affine-spaces-cd-action-evaluation.svg|center|244]]
-commutes, so displacing a point by $v$ and evaluating the translation $\tau_v$ there are the same operation. Starting instead from intrinsic data $(A,\mathcal{T},\cdot)$, each displacement $t$ of the induced affine space determines a translation satisfying $\tau_t(p)=p+t=t(p)$, so translating by $t$ is applying $t$, with $\tau$ being the identity on $\mathcal{T}$.
+
+The two descriptions carry the same data. Starting from an affine space $\mathcal{A}=(A,\vec{A},+)$, the linear isomorphism $\tau:\vec{A}\to\mathcal{T}(\mathcal{A})$ satisfies $\tau_v(p)=p+v$, so displacing a point by $v$ and evaluating the translation $\tau_v$ there are the same operation. Starting instead from intrinsic data $(A,\mathcal{T},\cdot)$, each displacement $t$ of the induced affine space determines a translation satisfying $\tau_t(p)=p+t=t(p)$, so translating by $t$ is applying $t$, with $\tau$ being the identity on $\mathcal{T}$.
 
 #### Example 3: Integer Scalars and the Circle
 
@@ -367,9 +366,11 @@ $$
 (x,a)&\mapsto x+a, & (x,a)&\mapsto\sqrt[3]{x^3+a},
 \end{aligned}
 $$
-and the cube map $h(x)=x^3$ makes the square
-![[affine-spaces-cd-cube-relabeling.svg|center|167]]
-commute. Thus $h$ carries the action of every displacement $a$ in the second structure to its action in the first while leaving $a$ itself unchanged. The two structures therefore differ only by relabeling points through $h$, which carries the halfway point $\sqrt[3]{1/2}$ between $0$ and $1$ in the second structure to the halfway point $\tfrac{1}{2}$ in the first.
+and the cube map $h(x)=x^3$ satisfies
+$$
+h\bigl(\operatorname{ev}'(x,a)\bigr)=x^3+a=\operatorname{ev}\bigl(h(x),a\bigr).
+$$
+Thus $h$ carries the action of every displacement $a$ in the second structure to its action in the first while leaving $a$ itself unchanged. The two structures therefore differ only by relabeling points through $h$, which carries the halfway point $\sqrt[3]{1/2}$ between $0$ and $1$ in the second structure to the halfway point $\tfrac{1}{2}$ in the first.
 
 ![[affine-spaces-cube-relabeling.svg|center|496]]
 
@@ -430,9 +431,7 @@ Under $\phi_o$, the addition of a displacement vector becomes vector addition, a
 $$
 \phi_o(p+v)=\bigl((p+v)-p\bigr)+(p-o)=\phi_o(p)+v,\qquad \phi_o(q)-\phi_o(p)=(q-o)-(p-o)=q-p.
 $$
-On the right, a vector space acts on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Drawn as [[Notation#Diagrams|diagrams]], the two identities say that the squares
-![[affine-spaces-cd-canonical-model.svg|center|418]]
-commute, with the operations of $\mathcal{A}$ along the top and those of $\mathcal{A}_{\vec{A}}$ along the bottom. Choosing a base point $o\in A$ thus identifies $\mathcal{A}$ with $\mathcal{A}_{\vec{A}}$, which we call the _canonical model_ of $\mathcal{A}$.
+On the right, a vector space acts on itself by its own addition, which by [[#Example 1 Solution Sets of Linear Equations|Example 1]] gives any vector space $V$ an affine space $\mathcal{A}_V:=(V,V,+)$, its _canonical affine space_. Choosing a base point $o\in A$ thus identifies $\mathcal{A}$ with $\mathcal{A}_{\vec{A}}$, which we call the _canonical model_ of $\mathcal{A}$.
 
 #### Induced Vector Space Structures
 
@@ -447,9 +446,11 @@ $$
 $$
 As $\phi_o$ is a bijection, each of the vector space axioms follows from the corresponding axiom on $\vec{A}$, so $\vec{A}_o:=(A,+_o,\cdot_o)$ is a vector space with zero vector $o=\phi_o^{-1}(0)$, and $\phi_o$ is a linear isomorphism.
 
-To see that no other choice is possible, let $\oplus$ be any addition on $A$ for which $\phi_o$ is linear. Then $\phi_o(p\oplus q)=\phi_o(p)+\phi_o(q)$, meaning that the square
-![[affine-spaces-cd-induced-addition.svg|center|179]]
-commutes. As its vertical maps are bijections, applying $\phi_o^{-1}$ [[Notation#Diagrams|determines]] its top map as $p\oplus q=p+_o q$, and the same argument applies to scalar multiplication.
+To see that no other choice is possible, let $\oplus$ be any addition on $A$ for which $\phi_o$ is linear. Then $\phi_o(p\oplus q)=\phi_o(p)+\phi_o(q)$, and applying $\phi_o^{-1}$ to both sides gives
+$$
+p\oplus q=\phi_o^{-1}\bigl(\phi_o(p)+\phi_o(q)\bigr)=p+_o q.
+$$
+The same argument applies to scalar multiplication.
 
 Geometrically, the addition operation on $\vec{A}_o$ corresponds to [[#Example 2 The Parallelogram Law|completing the parallelogram]] with fixed vertex $o$ and variable vertices $p,q$, which can be seen from the equation
 $$
@@ -483,9 +484,11 @@ $$
 v&\mapsto(o+v)-o'=v+(o-o'),
 \end{aligned}
 $$
-where the second equality follows from [[#Chasles' Identity and Some Corollaries|Chasles' identity]]. This map translates the canonical model by the nonzero vector $o-o'$, and so moves the zero vector and is not linear. As the square
-![[affine-spaces-cd-origins-points.svg|center|184]]
-commutes and its horizontal maps are linear isomorphisms, its left-hand map is linear exactly when its right-hand map is, so $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is not linear either.[^8]
+where the second equality follows from [[#Chasles' Identity and Some Corollaries|Chasles' identity]]. This map translates the canonical model by the nonzero vector $o-o'$, and so moves the zero vector and is not linear. As
+$$
+\operatorname{id}_A=\phi_{o'}^{-1}\circ\bigl(\phi_{o'}\circ\phi_o^{-1}\bigr)\circ\phi_o
+$$
+with $\phi_o$ and $\phi_{o'}$ linear isomorphisms, $\operatorname{id}_A:\vec{A}_o\to\vec{A}_{o'}$ is linear exactly when the transition map is, so it is not linear either.[^8]
 
 Reading position vectors instead as displacements, $\phi_o$ and $\phi_{o'}$ identify both $\vec{A}_o$ and $\vec{A}_{o'}$ with the space of displacements $\vec{A}$, and comparing the two through it takes each point of $\vec{A}_o$ to the point of $\vec{A}_{o'}$ with the same label. This comparison is given by the composite map
 $$
@@ -494,9 +497,7 @@ $$
 p&\mapsto o'+(p-o)=p+(o'-o),
 \end{aligned}
 $$
-where the second equality follows from [[#Example 2 The Parallelogram Law|the parallelogram law]]. This is the translation $\tau_{o'-o}$, and as the commuting square
-![[affine-spaces-cd-origins-displacements.svg|center|150]]
-has the identity as its right-hand map, $\tau_{o'-o}$ is a linear isomorphism, carrying sums in $\vec{A}_o$ to sums in $\vec{A}_{o'}$ and taking one origin to the other:
+where the second equality follows from [[#Example 2 The Parallelogram Law|the parallelogram law]]. This is the translation $\tau_{o'-o}$, and as a composite of the linear isomorphisms $\phi_o$ and $\phi_{o'}^{-1}$, it is a linear isomorphism, carrying sums in $\vec{A}_o$ to sums in $\vec{A}_{o'}$ and taking one origin to the other:
 $$
 \tau_{o'-o}(p+_o q)=\tau_{o'-o}(p)+_{o'}\tau_{o'-o}(q),\qquad \tau_{o'-o}(o)=o'.
 $$
